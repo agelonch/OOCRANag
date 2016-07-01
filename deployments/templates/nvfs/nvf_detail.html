@@ -1,0 +1,152 @@
+{%extends "base.html"%}
+
+{% block head %}
+   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+{% endblock head%}
+
+{%block content%}
+	<h1 class="page-header">Details of {{nvf.get_name}}</h1>
+	Frequencia central DL: {{nvf.freC_DL}}<br/>
+	Bandwidth DL: {{nvf.BW_DL}} dBm<br/>
+	Frequencia central UL: {{nvf.freC_UL}}<br/>
+	Bandwidth UL: {{nvf.BW_UL}} dBm<br/>
+	Power transmited: {{nvf.Pt}}<br/>
+	Number of users : {{nvf.users}}<br/>
+	Launched at: {{nvf.timestamp}}<br/>
+	</br>
+
+	</div>
+
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Resources</h1>
+          <h3>CPU and RAM</h3>
+          <canvas id="cpu" width="600" height="300" style = "float: left"></canvas> 
+          <canvas id="ram" width="600" height="300"></canvas>
+          <h3>Network and QoS</h3>        
+          <canvas id="network" width="600" height="300" style = "float: left"></canvas>
+          <canvas id="QoS" width="600" height="300" style = "float: left"></canvas>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="sub-header">List of users</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Pt DL</th>
+                  <th>Pt UL</th>
+                  <th>Service</th>
+                  <th>MCS</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                        <tr>
+                          <td>{{client.get_name}}</td>
+                          <td>{{client.pt_dl}}</td>
+                          <td>{{client.pt_dl}}</td>
+                          <td>{{client.rb}}</td>
+                          <td>{{client.mcs}}</td>
+                          <td>
+                            <a href="{{deploy.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
+                          </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%endblock content%}
+
+{%block map%}
+<script>
+	$(function(){
+		var data = {
+			labels: {{labels | safe}},
+			datasets:[
+			{
+				label: "the firts dataset",
+				fillColor: "rgba(153,0,76,0,2)",
+				strokeColor: "rgba(153,0,76,1)",
+				pointColor: "rgba(153,0,76,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(153,0,76,1)",
+				data: {{cpu | safe}}  
+			},
+			]
+		};
+		var option = {};
+		var ctx = document.getElementById("cpu").getContext("2d");
+		var mylineChart = new Chart(ctx).Line(data,option);
+	});
+</script>
+<script>
+	$(function(){
+		var data = {
+			labels: {{labels | safe}},
+			datasets:[
+			{
+				label: "the firts dataset",
+				fillColor: "rgba(153,0,76,0,2)",
+				strokeColor: "rgba(153,0,76,1)",
+				pointColor: "rgba(153,0,76,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(153,0,76,1)",
+				data: {{ram | safe}}  
+			},
+			]
+		};
+		var option = {};
+		var ctx = document.getElementById("ram").getContext("2d");
+		var mylineChart = new Chart(ctx).Line(data,option);
+	});
+</script>
+<script>
+	$(function(){
+		var data = {
+			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
+			datasets:[
+			{
+				label: "the firts dataset",
+				fillColor: "rgba(153,0,76,0,2)",
+				strokeColor: "rgba(153,0,76,1)",
+				pointColor: "rgba(153,0,76,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(153,0,76,1)",
+				data: [100,34,21,56,23,90,40] 
+			},
+			]
+		};
+		var option = {};
+		var ctx = document.getElementById("network").getContext("2d");
+		var mylineChart = new Chart(ctx).Line(data,option);
+	});
+</script>
+<script>
+	$(function(){
+		var data = {
+			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
+			datasets:[
+			{
+				label: "the firts dataset",
+				fillColor: "rgba(153,0,76,0,2)",
+				strokeColor: "rgba(153,0,76,1)",
+				pointColor: "rgba(153,0,76,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(153,0,76,1)",
+				data: [100,34,21,56,23,90,40] 
+			},
+			]
+		};
+		var option = {};
+		var ctx = document.getElementById("QoS").getContext("2d");
+		var mylineChart = new Chart(ctx).Line(data,option);
+	});
+</script>
+{%endblock map%}

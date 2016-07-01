@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block head %}
+   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+{% endblock head%}
+
+{% block content%}
+	<h2 class="sub-header">Settings</h2>
+
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title" style="height: 15px">
+          <div style="float: left"><a data-toggle="collapse" style="color: black" data-parent="#accordion" href="#collapse{{area.name}}">Modulation and coding Schema table</a></div>
+          <div style="float: right"><p id="price" style="color: black"></p></div>
+        </h4>
+      </div>
+      <div id="collapse{{area.name}}" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>MCS Indec (Imcs)</th>
+                  <th>Modulation Order (Qm)</th>
+                  <th>TBS Index (Itbs)</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for table in mcs %}
+                        <tr>
+                        {% for value in table%}
+                          <td>{{value}}</td>
+                        {%endfor%}
+                        </tr>
+                    {%endfor%}
+                </tbody>
+                    </table>
+                </div>
+
+                </br>
+                
+                <a href="mcs/" class="btn btn-default" role="button">Change table</a>
+                </div>
+              </div>
+            </div>
+
+            <br>
+
+
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title" style="height: 15px">
+          <div style="float: left"><a data-toggle="collapse" style="color: black" data-parent="#accordion" href="#endpoint">OpenStack Endpoints</a></div>
+          <div style="float: right"><p id="price" style="color: black"></p></div>
+        </h4>
+      </div>
+      <div id="endpoint" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Endpoint</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Nova Endpoint</td>
+                    <td>{{operator.end_nova}}</td>
+                  </tr>
+                  <tr>
+                    <td>Keystone Endpoint</td>
+                    <td>{{operator.end_keystone}}</td>
+                  </tr>
+                  <tr>
+                    <td>Heat Endpoint</td>
+                    <td>{{operator.end_heat}}</td>
+                  </tr>
+                  <tr>
+                    <td>Ceilometer Endpoint</td>
+                    <td>{{operator.end_ceilometer}}</td>
+                  </tr>
+                </tbody>
+                    </table>
+                </div>
+                </div>
+              </div>
+            </div> 
+
+
+  </div> 
+
+  </br>
+{% endblock content %}

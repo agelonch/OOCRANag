@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content%}
+	<h2 class="sub-header">List of available Areas</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for area in areas %}
+                        <tr>
+                          <td><a href='{{area.get_absolut_url}}'>{{area.name}}</a></td>
+                          <td>{{area.description}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+          <span class="step-links">
+            {% if areas.has_previous %}
+                <a href="?page={{ areas.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ areas.number }} of {{ areas.paginator.num_pages }}.
+            </span>
+
+            {% if areas.has_next %}
+                <a href="?page={{ areas.next_page_number }}">next</a>
+            {% endif %}
+          </span>
+        </div>
+        </br>
+
+    
+{% endblock content %}

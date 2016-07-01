@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content%}
+	<h2 class="sub-header">List of NFV</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>VNF</th>
+                    <th>Central frequency</th>
+                    <th>Bandwidth</th>
+                    <th>Power</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for nvf in object_list %}
+                        <tr>
+                          <td><a href='{{nvf.get_absolut_url}}'>{{nvf.name}}</a></td>
+                          <td>{{nvf.vnf}}</td>
+                          <td>{{nvf.freC}}</td>
+                          <td>{{nvf.BW}}</td>
+                          <td>{{nvf.Pt}}</td>
+                          <td>
+                            <a href="{{nvf.id}}/edit/" class="btn btn-default" role="button">Edit</a>
+                            <a href="{{nvf.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
+                          </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+          <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?page={{ object_list.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            </span>
+
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}">next</a>
+            {% endif %}
+          </span>
+        </div>
+        </br>
+  <a href="create/" class="btn btn-default" role="button">Create NVF</a>
+{% endblock content %}

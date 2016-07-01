@@ -1,0 +1,91 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>OPEN-OCRAN Orchestration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    {% block head %}{% endblock head%}
+    <link rel="stylesheet" type="text/css" href="{% static 'vnfs/dashboard.css' %}" />
+    <script src="{% static 'Chart.js' %}"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #333">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Open-OCRAN dashboard</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'operators:settings' %}"><i class="glyphicon glyphicon-wrench"></i>  Settings</a></li>
+            <li><a href="{% url 'logout' %}?next={% url 'login' %}"><i class="glyphicon glyphicon-user"></i>  {{user}}</a></li>
+            <li><a href="#">
+              <i class="material-icons" style="font-size:16px">help_outline</i>  Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% include "messages_display.html" %}
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" style="background-color: #333; margin-top: -1px">
+          <ul class="nav nav-sidebar">
+            <li>
+              <a style="color: #9d9d9d; font-size: 16px" href="{% url 'vnfs:list' %}">
+                <i class="glyphicon glyphicon-home" style="font-size:16px;"></i>  Dashboard</a>
+            </li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li>
+              <a style="color: #9d9d9d; font-size: 16px" href="{% url 'vnfs:list' %}">
+                <i class="glyphicon glyphicon-tasks" style="font-size:16px;"></i>  VNF Catalog</a>
+            </li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'scenarios:list' %}">
+              <i class="glyphicon glyphicon-globe" style="font-size:16px;"></i>  Areas</a></li>
+            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'deployments:list' %}">
+              <i class="material-icons" style="font-size:16px">settings_input_antenna</i> Deployment</a></li>
+            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'deployments:canals' %}">
+              <i class="material-icons" style="font-size:16px">perm_scan_wifi</i>  Canals</a></li>
+            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'users:list' %}">
+                <i class="glyphicon glyphicon-phone" style="font-size:16px;"></i>  Terminals</a></li>  
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'networks:list' %}">
+              <i class="material-icons" style="font-size:16px">settings_remote</i>  SDN Controllers</a></li>
+            <li><a style="color: #9d9d9d; font-size: 16px" href="#">
+              <i class="material-icons" style="font-size:16px">settings_input_hdmi</i>  Networks</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a style="color: #9d9d9d; font-size: 16px" href="">
+              <i class="glyphicon glyphicon-signal" style="font-size:16px;"></i>  Reports</a></li>
+          </ul>
+        </div>
+          
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+         {% block content%}{% endblock content%}
+        </div>
+      </div>
+    </div>
+    {%block map%}{%endblock map%}
+  </body>
+</html>

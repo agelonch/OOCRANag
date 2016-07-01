@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content%}
+	<h2 class="sub-header">List of virtual channels</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>SINR</th>
+                  <th>Network</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for controller in object_list %}
+                        <tr>
+                          <td><a href='http://147.83.118.228/horizon/instances/32019b4a-bfc6-4fdd-9730-d996f1b6f073/' target="_blank">{{controller.name}}</a></td>
+                          <td>{{controller.cluster}}</td>
+                          <td>{{controller.network}}</td>
+                          <td>
+                            <a href="{{controller.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
+                          </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+          <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?page={{ object_list.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            </span>
+
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}">next</a>
+            {% endif %}
+          </span>
+        </div>
+        </br>
+  <a href="create/" class="btn btn-default" role="button">Add virtual channel</a>
+{% endblock content %}

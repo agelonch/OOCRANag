@@ -1,0 +1,244 @@
+{%extends "base.html"%}
+
+{% block head %}
+   <script src="http://maps.googleapis.com/maps/api/js"></script>
+   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+{% endblock head%}
+
+{%block content%}
+	<h1>Details of {{deployment.name}}</h1>
+    <h1 class="page-header">Map view</h1>
+    <div id="map-canvas" style="width:auto;height:400px;"></div>
+    <br>
+  </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Resources</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <canvas id="cpu" width="200" height="200"></canvas>
+              <h4>CPU</h4>
+              <span class="text-muted">% ocuppation</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <canvas id="ram" width="200" height="200"></canvas>
+              <h4>RAM</h4>
+              <span class="text-muted">MB</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <canvas id="network" width="200" height="200"></canvas>
+              <h4>Network</h4>
+              <span class="text-muted">MB/s</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <canvas id="radio" width="200" height="200"></canvas>
+              <h4>Spectrum</h4>
+              <span class="text-muted">MHz</span>
+            </div>
+          </div>
+
+        <h2 class="sub-header">List of NVF</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Power transmistted carrier (dBm)</th>
+                  <th>Central frequency (Hz) DL</th>
+                  <th>Bandwidth (Hz) DL</th>
+                  <th>Central frequency (Hz) UL</th>
+                  <th>Bandwidth (Hz) UL</th>
+                  <th>Number of users</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for nvf in nvfs %}
+                        <tr>
+                          <td><a href='{{nvf.get_absolut_url}}'>{{nvf}}</a></td>
+                          <td>{{nvf.Pt}}</td>
+                          <td>{{nvf.freC_DL}}</td>
+                          <td>{{nvf.BW_DL}}</td>
+                          <td>{{nvf.freC_UL}}</td>
+                          <td>{{nvf.BW_UL}}</td>
+                          <td>{{nvf.users}}</td>
+                          <td>
+                            <a href="{{deploy.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
+                          </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+{%endblock content%}
+
+{%block map%}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        var dynamicColors = function() {
+          var r = Math.floor(Math.random() * 255);
+          var g = Math.floor(Math.random() * 255);
+          var b = Math.floor(Math.random() * 255);
+          return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        var ctx = $("#cpu").get(0).getContext("2d");
+        //sum = 360
+        var data = [
+          {% for nvf in nvfs %}
+            {
+              value: {{nvf.vnf.cpu}},
+              color: dynamicColors(),
+              highlight: dynamicColors(),
+              label: "{{nvf.get_name}}" 
+            },
+            {%endfor%}
+        ];
+        var piechart = new Chart(ctx).Pie(data);
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        var ctx = $("#ram").get(0).getContext("2d");
+        var dynamicColors = function() {
+          var r = Math.floor(Math.random() * 255);
+          var g = Math.floor(Math.random() * 255);
+          var b = Math.floor(Math.random() * 255);
+          return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        //sum = 360
+        var data = [
+          {% for nvf in nvfs %}
+            {
+              value: {{nvf.vnf.ram}},
+              color: dynamicColors(),
+              highlight: dynamicColors(),
+              label: "{{nvf.get_name}}" 
+            },
+            {%endfor%}
+        ];
+        var piechart = new Chart(ctx).Pie(data);
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        var ctx = $("#network").get(0).getContext("2d");
+        var dynamicColors = function() {
+          var r = Math.floor(Math.random() * 255);
+          var g = Math.floor(Math.random() * 255);
+          var b = Math.floor(Math.random() * 255);
+          return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        //sum = 360
+        var data = [
+          {% for nvf in nvfs %}
+            {
+              value: {{nvf.vnf.network}},
+              color: dynamicColors(),
+              highlight: dynamicColors(),
+              label: "{{nvf.get_name}}" 
+            },
+            {%endfor%}
+        ];
+        var piechart = new Chart(ctx).Pie(data);
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        var dynamicColors = function() {
+          var r = Math.floor(Math.random() * 255);
+          var g = Math.floor(Math.random() * 255);
+          var b = Math.floor(Math.random() * 255);
+          return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        var ctx = $("#radio").get(0).getContext("2d");
+        //sum = 360
+        var data = [
+            {% for nvf in nvfs %}
+            {
+              value: {{nvf.BW_DL}},
+              color: dynamicColors(),
+              highlight: dynamicColors(),
+              label: "{{nvf.get_name}}" 
+            },
+            {%endfor%}
+        ];
+        var piechart = new Chart(ctx).Pie(data);
+      });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+    function initialize() {
+      var dynamicColors = function() {
+          var r = Math.floor(Math.random() * 255);
+          var g = Math.floor(Math.random() * 255);
+          var b = Math.floor(Math.random() * 255);
+          return "rgb(" + r + "," + g + "," + b + ")";
+      }
+      var options = {
+        center:new google.maps.LatLng({{scenario.latitude}},{{scenario.longitude}}),
+        zoom:18,
+        disableDefaultUI: true,
+        //scrollwheel: false,
+        //draggable: false,
+        mapTypeId: google.maps.MapTypeId.MAP,
+      };
+      var map=new google.maps.Map(document.getElementById("map-canvas"),options);
+
+    ///////////////////////////nvfs///////////////////////////////////////
+      {% for nvf in nvfs %}
+        var {{nvf.bts.name}} = new google.maps.Marker({
+          position: {
+            lat: {{nvf.bts.lat}},
+            lng: {{nvf.bts.longi}}
+          },
+          icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-pushpin.png',
+          draggable: true,
+          map:map
+        });
+        {{nvf.bts.name}}.addListener('click', function() {
+          var infoWindow = new google.maps.InfoWindow({
+              content: '<h5>IP: {{nvf.get_name}}</h5> <h6>freC: {{nvf.freC_DL}}</h6> <h6>BW: {{nvf.BW_DL}}</h6>'
+          });
+          infoWindow.open(map,{{nvf.bts.name}});
+        });
+          var {{nvf.bts.name}}_circle = new google.maps.Circle({
+            map: map,
+            radius: {{nvf.radio}},    // 10 miles in metres
+            fillColor: '{{nvf.color | safe}}'
+          });
+
+        {{nvf.bts.name}}_circle.bindTo('center', {{nvf.bts.name}}, 'position');
+      {%endfor%}
+    ////////////////////////////////////////////////
+    ///////////////////////////CLIENTS///////////////////////////////////////
+      {% for client in clients %}
+        var {{client.get_name}} = new google.maps.Marker({
+          position: {
+            lat: {{client.lat}},
+            lng: {{client.longi}}
+          },
+          icon: '',
+          draggable: true,
+          map:map
+        });
+        {{client.get_name}}.addListener('click', function() {
+          var infoWindow = new google.maps.InfoWindow({
+              content: '{{client.get_name}}'
+          });
+          infoWindow.open(map,{{client.get_name}});
+        });
+        
+        var {{client.get_name}}_circle = new google.maps.Circle({
+          map: map,
+          radius: 0,    // 10 miles in metres
+          fillColor: '#AA0000'
+        });
+
+        {{client.get_name}}_circle.bindTo('center', {{client.get_name}}, 'position');
+      {%endfor%}
+    ////////////////////////////////////////////////
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+{%endblock map%}
