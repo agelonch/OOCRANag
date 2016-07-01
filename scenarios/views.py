@@ -19,7 +19,7 @@ def scenarios_list(request):
 		return HttpResponseRedirect(reverse('login'))
 	
 	areas = Area.objects.all()
-	paginator = Paginator(areas,6)
+	paginator = Paginator(areas,5)
 	page = request.GET.get('page')
 	print os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 	try:
