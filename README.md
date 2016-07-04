@@ -12,6 +12,8 @@ Launch virtualenv:
     
     source bin/active
     cd aloeo/NFVO
+    python manage.py migrate
+    python manage.py createsuperuser
     python manage.py runserver
 
 OpenStack Endpoints

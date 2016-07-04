@@ -79,8 +79,8 @@ resources:
       name = name
   	)
       
-  outfile = open('/home/howls/tfm/aloeo/resources/scenarios/yaml/'+name+'.yaml', 'w')
+  outfile = open('/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/'+name+'.yaml', 'w')
   outfile.write(header)
   outfile.close()
 
-  heat.Heat(token, username).create_stack(name, '/home/howls/tfm/aloeo/resources/scenarios/yaml/'+name+'.yaml')
+  heat.Heat(token, username).create_stack(name, '/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/'+name+'.yaml')

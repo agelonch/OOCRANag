@@ -8,10 +8,10 @@ class Operator(models.Model):
     name = models.CharField(max_length=120)
     bandwidth = models.FloatField()
     mcs = models.FileField(null=True, blank=True,upload_to='settings/')
-    end_nova=models.CharField(max_length=120,null=True, blank=True)
-    end_keystone=models.CharField(max_length=120,null=True, blank=True)
-    end_ceilometer=models.CharField(max_length=120,null=True, blank=True)
-    end_heat=models.CharField(max_length=120,null=True, blank=True)
+    end_nova=models.CharField(max_length=120,null=True, blank=True,default="http://controller:5000/v2.0/")
+    end_keystone=models.CharField(max_length=120,null=True, blank=True,default="http://controller:5000/v2.0/")
+    end_ceilometer=models.CharField(max_length=120,null=True, blank=True,default="http://controller:8777")
+    end_heat=models.CharField(max_length=120,null=True, blank=True,default="http://controller:8004/v1/")
 
     def __unicode__(self):
 		return self.name

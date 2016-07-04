@@ -42,11 +42,10 @@ def vnf_create(request):
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.operador = get_object_or_404(Operator, name = request.user.username)
-		#instance.save()
-		results = create(auth(request.user.username),request.user.username,form.cleaned_data.get("name"), form.cleaned_data.get("description"))
+		#results = create(auth(request.user.username),request.user.username,form.cleaned_data.get("name"), form.cleaned_data.get("description"))
 		messages.success(request,"Successfully created!")
-		instance.cpu = results[0][0]
-		instance.ram = results[0][1]
+		#instance.cpu = results[0][0]
+		#instance.ram = results[0][1]
 		instance.save()
 		return redirect("vnfs:list")
 	context = {
@@ -68,8 +67,6 @@ def vnf_detail(request,id=None):
 	if not request.user.is_authenticated():
 		return HttpResponseRedirect(reverse('login'))
 
-	if not request.user.is_staff:
-		raise Http404
 	instance = get_object_or_404(Vnf, id=id)
 	context = {
 		"user": request.user.username,

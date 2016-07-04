@@ -7,5 +7,7 @@ class VnfForm(forms.ModelForm):
 		fields = [
 			"name",
 			"description",
-			"modules",
+			#"modules",
+			"image",
+			"script",
 		]
