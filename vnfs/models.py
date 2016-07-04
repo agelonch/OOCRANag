@@ -6,7 +6,7 @@ from operators.models import Operator
 
 class Vnf(models.Model):
 	operador = models.ForeignKey(Operator, on_delete=models.CASCADE, null=True, blank=True)
-	name = models.CharField(max_length=120, default="TX_LTE")
+	name = models.CharField(max_length=120, default="LTE")
 	modules = models.FileField(null=True, blank=True,upload_to='vnfs/modules/')
 	yaml = models.FileField(null=True, blank=True,upload_to='vnfs/yaml/')
 	description = models.TextField(null=True, blank=True, default ="SDN code for launch pyshical layer LTE TX")

@@ -110,6 +110,7 @@ def rand_color():
     color = ('#%02X%02X%02X' % (r(),r(),r()))
     return color
 
+
 def planification_DL(nvf,btss):
 
     start = nvf.bts.start()
