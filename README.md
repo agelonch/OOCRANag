@@ -6,7 +6,8 @@ Install dependencies:
 
     pip install python-openstackclient
     pip install python-heatclient
-    pip install python-ceilometerclient 
+    pip install python-ceilometerclient
+
 Launch virtualenv:
     
     source bin/active
