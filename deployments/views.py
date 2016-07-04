@@ -47,6 +47,16 @@ def deployment_create(request, id=None):
     form = DeploymentForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         deploy = form.save(commit=False)
+        ##########no repetir deploy####
+        search_depl=Deployment.objects.filter(name=form.cleaned_data.get("name"))
+
+        if len(search_depl):
+            context = {
+                "user": request.user.username,
+                "form": form,
+            }
+            return render(request, "deployments/add_catalog.html", context)
+
         deploy.propietario = get_object_or_404(Operator, name=request.user.username)
         deploy.start = time.strftime("%H:00")
         oarea = get_object_or_404(OArea, pk=id)
@@ -140,10 +150,8 @@ def deployment_delete(request, id=None):
         for nvf in nvfs:
             bts = get_object_or_404(Bts, ip=nvf.bts.ip)
             lista = bts.freCs.split('/')
-            print lista
             lista.remove(str(nvf.freC_DL - nvf.BW_DL / 2) + "-" + str(nvf.freC_DL + nvf.BW_DL / 2))
             lista.remove(str(nvf.freC_UL - nvf.BW_UL / 2) + "-" + str(nvf.freC_UL + nvf.BW_UL / 2))
-            print lista
             bts.freCs = '/'.join(lista)
             bts.save()
 
@@ -231,7 +239,7 @@ def autodeploy(request, id=None):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    area = get_object_or_404(Area, pk=id)
+    area = get_object_or_404(OArea, pk=id)
     auto_deploy = Deployment(area=area, name=area.name, start="00:00", stop="23:59",
                              propietario=get_object_or_404(Operator, name=request.user.username))
     catalog = Deployment.objects.filter(propietario__name=request.user.username).filter(start=None)
@@ -296,6 +304,15 @@ def add_catalog(request, id=None):
         deploy = form.save(commit=False)
         deploy.propietario = get_object_or_404(Operator, name=request.user.username)
         area = get_object_or_404(OArea, pk=id)
+        search_depl=Deployment.objects.filter(name=form.cleaned_data.get("name"))
+
+        if len(search_depl):
+            context = {
+                "user": request.user.username,
+                "form": form,
+            }
+            return render(request, "deployments/add_catalog.html", context)
+
         deploy.area = area
         deploy.save()
 
@@ -312,6 +329,8 @@ def add_catalog(request, id=None):
                       static_ram='/',
                       operator=get_object_or_404(Operator, name=request.user.username),
                       Pt=element['pt'])
+
+            nvf.radio = nvf.bts.max_dist(int(element['pt']), 2400700000)
 
             deploy.price = deploy.price + price(nvf, nvf.BW_DL, deploy)
             nvf.save()
