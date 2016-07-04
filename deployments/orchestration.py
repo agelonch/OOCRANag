@@ -1,14 +1,12 @@
 from math import radians, cos, sin, asin, sqrt
 import numpy as np
 import random
+import ast
 from django.shortcuts import get_object_or_404
 from vnfs.models import Vnf, Operator
 from scenarios.models import Bts, Area
 from deployments.models import Deployment, Nvf
 from users.models import Client
-from twisted.internet import task
-from twisted.internet import reactor
-import threading, time
 from aloeoCLI.VNFM.deployments.deployments import create
 from .authentication import auth
 
@@ -111,9 +109,10 @@ def rand_color():
     return color
 
 
-def planification_DL(nvf,btss):
+def planification_DL(nvf,colors_op):
 
     start = nvf.bts.start()
+    colors = ast.literal_eval(colors_op.colors)
 
     if nvf.BW_DL == 1400000:
         nvf.rb_offer = 18000000
@@ -124,8 +123,6 @@ def planification_DL(nvf,btss):
     if nvf.BW_DL == 10000000:
         nvf.rb_offer = 150000000
 
-    nvf.color_DL = rand_color()
-
     neigh = [ str(x) for x in nvf.bts.neighbor.split('/') ]
     frequencies = []
     for bts in neigh:
@@ -135,7 +132,6 @@ def planification_DL(nvf,btss):
             frequencies.append(frec)
 
     assigned = [ str(x) for x in nvf.bts.freCs.split('/') ]
-
 
     while (True):
         if not str(start)+'-'+str(int(start)+int(nvf.BW_DL)) in frequencies:
@@ -148,12 +144,20 @@ def planification_DL(nvf,btss):
         else:
             start = int(start)+int(nvf.BW_DL)
 
+
+    if colors.has_key(nvf.freC_DL):
+        nvf.color_DL = colors[nvf.freC_DL]
+    else:
+        nvf.color_DL = rand_color()
+        colors[nvf.freC_DL] = nvf.color_DL
+        colors_op.colors = str(colors)
+
     nvf.save()
     bts.save()
     return nvf.bts.freCs
     
 
-def planification_UL(nvf,btss):
+def planification_UL(nvf):
     start = int(nvf.bts.start())+20000000
 
     nvf.color_UL = rand_color() 

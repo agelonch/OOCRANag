@@ -81,9 +81,10 @@ def deployment_create(request, id=None):
                       operator=get_object_or_404(Operator, name=request.user.username),
                       Pt=element['pt'])
 
-            planification_DL(nvf, Bts.objects.all())
-            planification_UL(nvf, Bts.objects.all())
+            planification_DL(nvf, deploy.propietario)
+            planification_UL(nvf)
             nvf.radio = nvf.bts.max_dist(int(element['pt']), nvf.freC_DL)
+            deploy.propietario.save()
             bts.save()
             nvf.save()
             deploy.rb += nvf.rb_offer
