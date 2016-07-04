@@ -20,7 +20,4 @@ OpenStack Endpoints
     keystone=http://controller:5000/v2.0/
     ceilometer=http://controller:8777
 
-SDR 
-====
-LTE TX code: https://github.com/gerardromero/SDR_LTE_TX.git
 
