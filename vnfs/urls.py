@@ -16,18 +16,19 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required, permission_required
-from django.views.generic import TemplateView
 
 from .views import (
-	vnf_list,
-	vnf_create,
-	vnf_detail,
-	vnf_delete,
+    vnf_list,
+    vnf_create,
+    vnf_detail,
+    vnf_delete,
+    vnf_edit,
 )
 
 urlpatterns = [
-	url(r'^$', vnf_list, name="list"),
+    url(r'^$', vnf_list, name="list"),
     url(r'^create/$', vnf_create),
+    url(r'^(?P<id>\d+)/delete/$', vnf_delete, name='vnf_delete'),
+    url(r'^(?P<id>\d+)/edit/$', vnf_edit, name='vnf_edit'),
     url(r'^(?P<id>\d+)/$', vnf_detail, name='detail'),
-    url(r'^(?P<id>\d+)/delete/$', vnf_delete),
 ]

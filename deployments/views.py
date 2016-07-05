@@ -50,6 +50,7 @@ def deployment_create(request, id=None):
         search_depl = Deployment.objects.filter(name=form.cleaned_data.get("name"))
 
         if len(search_depl):
+            messages.success(request, "Do not repeat the deployment name!", extra_tags="alert alert-success")
             context = {
                 "user": request.user.username,
                 "form": form,
@@ -99,7 +100,7 @@ def deployment_create(request, id=None):
         deploy.save()
 
         # create(auth(request.user.username), request.user.username, form.cleaned_data.get("name"), form.cleaned_data.get("description"), nvfs)
-
+        messages.success(request, "Deployment successfully created!", extra_tags="alert alert-success")
         return redirect("deployments:list")
     context = {
         "user": request.user.username,
@@ -157,7 +158,7 @@ def deployment_delete(request, id=None):
 
         # delete(auth(request.user.username), request.user.username, deploy.name)
         deploy.delete()
-    messages.success(request, "Successfully deleted!")
+    messages.success(request, "Deployment successfully deleted!", extra_tags="alert alert-success")
     return redirect("deployments:list")
 
 
@@ -257,7 +258,7 @@ def channel_create(request):
     form = ChannelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
-        messages.success(request, "Successfully created!")
+        messages.success(request, "Channel successfully created!", extra_tags="alert alert-success")
         instance.save()
         return redirect("deployments:canals")
     context = {
@@ -285,7 +286,7 @@ def channel_delete(request, id=None):
 
     instance = get_object_or_404(Channel, id=id)
     instance.delete()
-    messages.success(request, "Successfully deleted!")
+    messages.success(request, "Channel successfully deleted!", extra_tags="alert alert-success")
     return redirect("deployments:canals")
 
 
@@ -322,7 +323,7 @@ def autodeploy(request, id=None):
     area.save()
 
     auto_deploy.save()
-
+    messages.success(request, "Auto-deployment launched!", extra_tags="alert alert-success")
     return redirect("deployments:list")
 
 
@@ -361,6 +362,7 @@ def add_catalog(request, id=None):
         search_depl = Deployment.objects.filter(name=form.cleaned_data.get("name"))
 
         if len(search_depl):
+            messages.success(request, "Do not repeate the deployment name!", extra_tags="alert alert-danger")
             context = {
                 "user": request.user.username,
                 "form": form,
@@ -391,6 +393,7 @@ def add_catalog(request, id=None):
 
         area.save()
         deploy.save()
+        messages.success(request, "Deployment added to the catalog!", extra_tags="alert alert-success")
         return redirect("deployments:list")
     context = {
         "user": request.user.username,
@@ -410,5 +413,5 @@ def del_catalog(request, id=None, id_deploy=None):
 
     deploy.delete()
 
-    messages.success(request, "Successfully deleted!")
+    messages.success(request, "Deployment deleted!", extra_tags="alert alert-success")
     return redirect("deployments:list")

@@ -7,7 +7,7 @@ from django.shortcuts import render
 from .forms import UserForm
 from .models import Client
 from deployments.models import Nvf, Deployment
-from vnfs.models import Vnf
+from django.contrib import messages
 from operators.models import Operator
 from .orchestration import optim, distance, mcs
 
@@ -64,6 +64,7 @@ def users_create(request):
             nvf.save()
             cli.save()
 
+        messages.success(request, "Subscribers launched!", extra_tags="alert alert-success")
         return redirect("users:list")
     context = {
         "user": request.user.username,
@@ -71,3 +72,13 @@ def users_create(request):
         "deploys": Deployment.objects.filter(propietario__name=request.user.username),
     }
     return render(request, "users/users_form.html", context)
+
+
+def users_delete(request, id=None):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+
+    instance = get_object_or_404(Client, id=id)
+    instance.delete()
+    messages.success(request, "Subscriber successfully deleted!", extra_tags="alert alert-success")
+    return redirect("users:list")
