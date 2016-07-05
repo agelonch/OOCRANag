@@ -17,16 +17,16 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from .views import (
-	scenarios_list,
+    scenarios_list,
     area_create,
-	area_detail,
-	scenario_delete,
-	)
+    area_detail,
+    scenario_delete,
+)
 
 urlpatterns = [
-	url(r'^$', scenarios_list, name="list"),
+    url(r'^$', scenarios_list, name="list"),
     url(r'^create_area/$', area_create, name='area_create'),
     url(r'^areas/(?P<id>\d+)/$', area_detail, name='area_detail'),
-    #url(r'^(?P<id>\d+)/edit/$', vnf_edit, name='edit'),
+    # url(r'^(?P<id>\d+)/edit/$', vnf_edit, name='edit'),
     url(r'^(?P<id>\d+)/delete/$', scenario_delete, name="delete"),
 ]
