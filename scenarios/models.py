@@ -6,15 +6,11 @@ import math
 
 
 class Area(models.Model):
-    name = models.CharField(max_length=120)
+    name = models.CharField(max_length=120, default="EETAC")
     latitude = models.CharField(max_length=120, default='41.275621')
     longitude = models.CharField(max_length=120, default='1.986591')
-    description = models.TextField(default='description')
+    description = models.TextField(default='Sample one mobile network deployed on the EETAC')
     file = models.FileField(null=True, blank=True, upload_to='btss/')
-    price = models.FloatField(null=True, blank=True, default=0)
-    forecast = models.CharField(max_length=500, null=True, blank=True)
-    rb_offer = models.CharField(max_length=500, null=True, blank=True,
-                                default='[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]')
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 

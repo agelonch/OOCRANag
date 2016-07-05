@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from .models import Bts, Area
+from .models import Bts, Area, OArea
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import AreaForm
-from .authentication import auth
 from operators.models import Operator
+from .authentication import auth
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 import sys, os
 
@@ -30,6 +31,7 @@ def scenarios_list(request):
         areas = paginator.page(paginator.num_pages)
     context = {
         "user": request.user.username,
+        "admin": request.user,
         "areas": areas,
     }
     return render(request, "scenarios/scenarios_list.html", context)
@@ -48,7 +50,7 @@ def area_detail(request, id=None):
 
 
 def area_create(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_superuser:
         return HttpResponseRedirect(reverse('login'))
 
     form = AreaForm(request.POST or None, request.FILES or None)
@@ -62,9 +64,15 @@ def area_create(request):
                       neighbor=vm['neighbor'], BW=vm['bw'], area=area)
             bts.save()
 
-        infrastructure(auth(request.user.username), request.user.username, form.cleaned_data.get("name"),
-                       form.cleaned_data.get("description"))
+        operators = Operator.objects.filter()
+        for operator in operators:
+            infrastructure(auth(operator.name), operator.name, form.cleaned_data.get("name"),form.cleaned_data.get("description"))
+            oarea= OArea(name=form.cleaned_data.get("name"),
+                         propietario=operator,
+                         area=area)
+            oarea.save()
 
+        messages.success(request, "Area successfully created!", extra_tags="alert alert-success")
         return redirect("scenarios:list")
     context = {
         "user": request.user.username,

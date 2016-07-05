@@ -38,5 +38,9 @@
         </div>
         </br>
 
+        {% if admin.is_superuser %}
+                <a href="create_area" class="btn btn-default" role="button">Add Area</a>
+        {% endif %}
+
     
 {% endblock content %}

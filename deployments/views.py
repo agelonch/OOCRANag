@@ -258,6 +258,7 @@ def channel_create(request):
     form = ChannelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.propietario = get_object_or_404(Operator, name=request.user.username)
         messages.success(request, "Channel successfully created!", extra_tags="alert alert-success")
         instance.save()
         return redirect("deployments:canals")
