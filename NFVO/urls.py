@@ -19,7 +19,7 @@ from django.contrib.auth import views
 from deployments.forms import LoginForm
 
 urlpatterns = [
-	url(r'^vnfs/', include("vnfs.urls", namespace='vnfs')),
+    url(r'^vnfs/', include("vnfs.urls", namespace='vnfs')),
     url(r'^networks/', include("networks.urls", namespace='networks')),
     url(r'^operators/', include("operators.urls", namespace='operators')),
     url(r'^scenarios/', include("scenarios.urls", namespace='scenarios')),
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^users/', include("users.urls", namespace='users')),
     url(r'^admin/', admin.site.urls),
 
-    url(r'^login/$', views.login, {'template_name': 'admin/login.html', 'authentication_form': LoginForm},name='login'),
+    url(r'^login/$', views.login, {'template_name': 'admin/login.html', 'authentication_form': LoginForm},
+        name='login'),
     url(r'^logout/$', views.logout, {'next_page': '/'}, name='logout'),
 ]
