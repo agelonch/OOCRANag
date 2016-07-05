@@ -11,3 +11,4 @@ class VnfForm(forms.ModelForm):
 			"image",
 			"script",
 		]
+

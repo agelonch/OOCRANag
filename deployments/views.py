@@ -3,8 +3,8 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Deployment, Nvf
-from .forms import DeploymentForm, AddForm
+from .models import Deployment, Nvf, Channel
+from .forms import DeploymentForm, AddForm, ChannelForm
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from vnfs.models import Vnf
@@ -14,7 +14,6 @@ from users.models import Client
 import os, time
 from django.shortcuts import render
 from .orchestration import planification_DL, planification_UL, rb_offer, price, list_bs
-
 
 
 def deployment_list(request):
@@ -48,7 +47,7 @@ def deployment_create(request, id=None):
     if form.is_valid():
         deploy = form.save(commit=False)
         ##########no repetir deploy####
-        search_depl=Deployment.objects.filter(name=form.cleaned_data.get("name"))
+        search_depl = Deployment.objects.filter(name=form.cleaned_data.get("name"))
 
         if len(search_depl):
             context = {
@@ -233,7 +232,7 @@ def canals_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    queryset_list = Deployment.objects.filter(propietario__name=request.user.username).filter(start__isnull=False)
+    queryset_list = Channel.objects.filter()
 
     paginator = Paginator(queryset_list, 5)
     page = request.GET.get('page')
@@ -248,7 +247,46 @@ def canals_list(request):
         "object_list": queryset,
     }
 
-    return render(request, "canals/canals_list.html",context)
+    return render(request, "canals/canals_list.html", context)
+
+
+def channel_create(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+
+    form = ChannelForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        messages.success(request, "Successfully created!")
+        instance.save()
+        return redirect("deployments:canals")
+    context = {
+        "user": request.user.username,
+        "form": form,
+    }
+    return render(request, "canals/channel_form.html", context)
+
+
+def channel_detail(request, id=None):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+
+    instance = get_object_or_404(Channel, id=id)
+    context = {
+        "user": request.user.username,
+        "vnf": instance,
+    }
+    return render(request, "canals/channel_detail.html", context)
+
+
+def channel_delete(request, id=None):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
+
+    instance = get_object_or_404(Channel, id=id)
+    instance.delete()
+    messages.success(request, "Successfully deleted!")
+    return redirect("deployments:canals")
 
 
 def autodeploy(request, id=None):
@@ -320,7 +358,7 @@ def add_catalog(request, id=None):
         deploy = form.save(commit=False)
         deploy.propietario = get_object_or_404(Operator, name=request.user.username)
         area = get_object_or_404(OArea, pk=id)
-        search_depl=Deployment.objects.filter(name=form.cleaned_data.get("name"))
+        search_depl = Deployment.objects.filter(name=form.cleaned_data.get("name"))
 
         if len(search_depl):
             context = {

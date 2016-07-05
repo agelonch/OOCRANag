@@ -1,5 +1,5 @@
 from django import forms
-from .models import Deployment
+from .models import Deployment, Channel
 
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
@@ -14,6 +14,20 @@ class DeploymentForm(forms.ModelForm):
             "file",
             # "start",
             "stop",
+        ]
+
+
+class ChannelForm(forms.ModelForm):
+    class Meta:
+        model = Channel
+        fields = [
+            "name",
+            "description",
+            "sinr",
+            "image",
+            "tx",
+            "rx",
+            "script",
         ]
 
 

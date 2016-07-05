@@ -18,11 +18,11 @@ from django.contrib import admin
 from .forms import LoginForm
 
 from .views import (
-	deployment_list,
-	deployment_create,
-	deployment_detail,
-	deployment_edit,
-	deployment_delete,
+    deployment_list,
+    deployment_create,
+    deployment_detail,
+    deployment_edit,
+    deployment_delete,
     nvf_detail,
     login,
     canals_list,
@@ -30,18 +30,27 @@ from .views import (
     catalog,
     add_catalog,
     del_catalog,
-	)
+    channel_create,
+    channel_detail,
+    channel_delete,
+)
 
 urlpatterns = [
-	url(r'^$', deployment_list, name="list"),
+    url(r'^$', deployment_list, name="list"),
     url(r'^(?P<id>\d+)/$', deployment_detail, name='detail'),
     url(r'^(?P<id>\d+)/edit/$', deployment_edit, name='edit'),
     url(r'^(?P<id>\d+)/delete/$', deployment_delete, name='delete'),
     url(r'^(?P<id>\d+)/create/$', deployment_create, name='create'),
     url(r'^(?P<id>\d+)/autodeploy/$', autodeploy, name='autodeploy'),
+
     url(r'^(?P<id>\d+)/catalog/add_catalog/$', add_catalog, name='catalog_create'),
     url(r'^(?P<id>\d+)/catalog/delete/(?P<id_deploy>\d+)', del_catalog, name='catalog_delete'),
     url(r'^(?P<id>\d+)/catalog/$', catalog, name='catalog'),
+
     url(r'^nvf/(?P<id>\d+)/$', nvf_detail, name='nvf_detail'),
+
+    url(r'^canals/channel_create/$', channel_create, name='channel_create'),
+    url(r'^canals/(?P<id>\d+)/delete/$', channel_delete, name='channel_delete'),
+    url(r'^canals/(?P<id>\d+)/$', channel_detail, name='channel_detail'),
     url(r'^canals/$', canals_list, name='canals'),
 ]

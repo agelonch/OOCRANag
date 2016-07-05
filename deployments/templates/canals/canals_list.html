@@ -14,14 +14,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for controller in object_list %}
+                    {% for obj in object_list %}
                         <tr>
-                          <td>{{controller.name}}</a></td>
+                          <td><a href='{{obj.get_absolut_url}}'>{{obj.name}}</a></td>
                             <td>15</td>
                             <td>192.168.1.9</td>
                           <td>192.168.1.12</td>
                           <td>
-                            <a href="{{controller.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
+                            <a href="{{obj.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
                           </td>
                         </tr>
                     {%endfor%}
@@ -45,5 +45,5 @@
           </span>
         </div>
         </br>
-  <a href="create/" class="btn btn-default" role="button">Add virtual channel</a>
+  <a href="channel_create/" class="btn btn-default" role="button">Add virtual channel</a>
 {% endblock content %}
