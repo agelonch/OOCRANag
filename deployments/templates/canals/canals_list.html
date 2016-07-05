@@ -7,17 +7,19 @@
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>SINR</th>
-                  <th>Network</th>
+                  <th>SINR (dB)</th>
+                  <th>TX IP</th>
+                  <th>RX IP</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                     {% for controller in object_list %}
                         <tr>
-                          <td><a href='http://147.83.118.228/horizon/instances/32019b4a-bfc6-4fdd-9730-d996f1b6f073/' target="_blank">{{controller.name}}</a></td>
-                          <td>{{controller.cluster}}</td>
-                          <td>{{controller.network}}</td>
+                          <td>{{controller.name}}</a></td>
+                            <td>15</td>
+                            <td>192.168.1.9</td>
+                          <td>192.168.1.12</td>
                           <td>
                             <a href="{{controller.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
                           </td>

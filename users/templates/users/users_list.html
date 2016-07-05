@@ -16,7 +16,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for client in clients %}
+                    {% for client in object_list %}
                         <tr>
                           <td>{{client.get_name}}</td>
                           <td>{{client.nvf}}</td>
@@ -38,11 +38,9 @@
             {% if object_list.has_previous %}
                 <a href="?page={{ object_list.previous_page_number }}">previous</a>
             {% endif %}
-
             <span class="current">
                 Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
             </span>
-
             {% if object_list.has_next %}
                 <a href="?page={{ object_list.next_page_number }}">next</a>
             {% endif %}

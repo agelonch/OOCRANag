@@ -233,7 +233,22 @@ def canals_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    return render(request, "canals/canals_list.html")
+    queryset_list = Deployment.objects.filter(propietario__name=request.user.username).filter(start__isnull=False)
+
+    paginator = Paginator(queryset_list, 5)
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        "user": request.user.username,
+        "object_list": queryset,
+    }
+
+    return render(request, "canals/canals_list.html",context)
 
 
 def autodeploy(request, id=None):
