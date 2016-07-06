@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f9c07d5d-ff1e-4b10-9908-79a1c67f73e7" name="Default" comment="are and oarea improve">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/deployments/Vnfm/deployments.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/ceilometer/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/ceilometer/ceilometer.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/heat/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/heat/heat.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/keystone/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/keystone/keystone.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/nova/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/OpenStack/nova/nova.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deployments/authentication.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VIM/__init__.py" afterPath="$PROJECT_DIR$/deployments/Vnfm/__init__.py" />
+    <list default="true" id="f9c07d5d-ff1e-4b10-9908-79a1c67f73e7" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/ceilometer/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/ceilometer/ceilometer.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/heat/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/heat/heat.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/keystone/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/keystone/keystone.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/nova/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/OpenStack/nova/nova.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VIM/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/deployments.py" afterPath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/deployments.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/scenario/structura.py" afterPath="$PROJECT_DIR$/aloeoCLI/VNFM/scenario/structura.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/vnfs.py" afterPath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/vnfs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deployments/orchestration.py" afterPath="$PROJECT_DIR$/deployments/orchestration.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deployments/views.py" afterPath="$PROJECT_DIR$/deployments/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/operators/models.py" afterPath="$PROJECT_DIR$/operators/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vnfs/views.py" afterPath="$PROJECT_DIR$/vnfs/views.py" />
     </list>
     <ignored path="NFVO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -251,6 +242,126 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VIM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VIM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenStack" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VIM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenStack" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nova" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VIM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenStack" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="keystone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VIM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenStack" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="heat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NFVO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VIM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OpenStack" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceilometer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -426,13 +537,13 @@
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17274758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32828283" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32828283" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3013468" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30808082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32828283" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -467,7 +578,8 @@
     <MESSAGE value="canals" />
     <MESSAGE value="canals delete,add-list" />
     <MESSAGE value="are and oarea improve" />
-    <option name="LAST_COMMIT_MESSAGE" value="are and oarea improve" />
+    <MESSAGE value="update keystone" />
+    <option name="LAST_COMMIT_MESSAGE" value="update keystone" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
