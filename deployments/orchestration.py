@@ -5,10 +5,7 @@ import ast
 from django.shortcuts import get_object_or_404
 from vnfs.models import Vnf, Operator
 from scenarios.models import Bts, Area
-from deployments.models import Deployment, Nvf
-from users.models import Client
-from aloeoCLI.VNFM.deployments.deployments import create
-from .authentication import auth
+
 
 def distance(lon1, lat1, lon2, lat2):
     """

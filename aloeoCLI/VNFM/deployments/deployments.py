@@ -1,16 +1,12 @@
-import shutil, os, yaml
-import numpy as np
 from jinja2 import Template
 
-from aloeoCLI.VIM.OpenStack.heat import heat
+from VIM.OpenStack import heat
 
-import aloeoCLI.tasks.configuration as conf
 
-def create(token, username, name ,description, lista):
+def create(token, username, name, description, lista):
+    nvf_list = []
 
-  nvf_list = []
-  
-  header = Template(u'''\
+    header = Template(u'''\
 heat_template_version: 2013-05-23
 
 description: {{description}}
@@ -19,7 +15,7 @@ parameters:
   image:
     type: string
     description: Name of image to use for servers
-    default: LTE
+    default: UBU1404SERVER6GUHD380srsLTE_AUTOSTART
   flavor:
     type: string
     description: Flavor to use for servers
@@ -28,14 +24,13 @@ parameters:
 resources:
   
   ''')
-  header = header.render(
-      description = description,
-  	)
-  
-  nvfi = ""
-  for bts in lista:
+    header = header.render(
+        description=description,
+    )
 
-    nvf = Template(u'''\
+    nvfi = ""
+    for bts in lista:
+        nvf = Template(u'''\
 {{ip}}:
     type: OS::Nova::Server
     properties:
@@ -43,7 +38,7 @@ resources:
       image: {{image}}
       flavor: {{flavor}}
       networks:
-        - network: EETAC_bts_net
+        - network: selfservice
       user_data_format: RAW
       user_data: |
         #cloud-config
@@ -64,23 +59,23 @@ resources:
          - sudo chmod 777 /home/nodea/autorun.sh
   ''')
 
-    nvf = nvf.render(
-      		name = bts.bts.name,
-      		image = "TX_LTE",
-      		#flavor = bts.split(',')[4],
-      		flavor = "m1.small",
-          freC = bts.freC_DL,
-          ip = bts.name,
-  		)
-    nvfi = nvfi + nvf
-    nvf_list.append(bts)
-      
-  outfile = open('/home/howls/tfm/aloeo/resources/deployments/yaml/'+name+'.yaml', 'w')
-  outfile.write(header+nvfi)
-  outfile.close()
+        nvf = nvf.render(
+            name=bts.bts.name,
+            image="TX_LTE",
+            # flavor = bts.split(',')[4],
+            flavor="m1.small",
+            freC=bts.freC_DL,
+            ip=bts.name,
+        )
+        nvfi = nvfi + nvf
+        nvf_list.append(bts)
 
-  heat.Heat(token, username).create_stack(name, '/home/howls/tfm/aloeo/resources/deployments/yaml/'+name+'.yaml')
+    outfile = open('/home/howls/Apps/OOCRAN/aloeo/resources/deployments/yaml/' + name + '.yaml', 'w')
+    outfile.write(header + nvfi)
+    outfile.close()
+
+    heat.Heat(token, username).create_stack(name, '/home/howls/Apps/OOCRAN/aloeo/resources/deployments/yaml/' + name + '.yaml')
 
 
 def delete(token, username, name):
-  	heat.Heat(token,username).delete_stack(name)
+    heat.Heat(token, username).delete_stack(name)

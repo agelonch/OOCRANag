@@ -1,10 +1,7 @@
-import shutil, os, yaml
-import numpy as np
 from jinja2 import Template
 
-from aloeoCLI.VIM.OpenStack.heat import heat
+from VIM.OpenStack import heat
 
-import aloeoCLI.tasks.configuration as conf
 
 def infrastructure(token, username, name ,description):
   
@@ -83,4 +80,4 @@ resources:
   outfile.write(header)
   outfile.close()
 
-  heat.Heat(token, username).create_stack(name, '/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/'+name+'.yaml')
+  heat.Heat(token, username).create_stack(name, '/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/' + name + '.yaml')

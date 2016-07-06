@@ -13,6 +13,7 @@ from scenarios.models import Bts, Area, OArea
 from users.models import Client
 import os, time
 from django.shortcuts import render
+from Vnfm.deployments import create
 from .orchestration import planification_DL, planification_UL, rb_offer, price, list_bs
 
 
@@ -99,7 +100,11 @@ def deployment_create(request, id=None):
         oarea.save()
         deploy.save()
 
-        # create(auth(request.user.username), request.user.username, form.cleaned_data.get("name"), form.cleaned_data.get("description"), nvfs)
+        create(get_object_or_404(Operator, name=request.user.username),
+               form.cleaned_data.get("name"),
+               form.cleaned_data.get("description"),
+               nvfs)
+
         messages.success(request, "Deployment successfully created!", extra_tags="alert alert-success")
         return redirect("deployments:list")
     context = {

@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from .authentication import auth
 
-from aloeoCLI.VNFM.vnfs.vnfs import create
+#from aloeoCLI.VNFM.vnfs.vnfs import create
 
 from django.contrib.auth.decorators import login_required
 
