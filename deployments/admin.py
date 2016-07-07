@@ -1,26 +1,43 @@
 from django.contrib import admin
-from .models import Nvf
-from .models import Deployment
+from .models import Deployment, Channel, Nvf
+
 
 class DeploymentModelAdmin(admin.ModelAdmin):
-	list_display = ["name","update","timestamp"]
-	list_display_links = ["update"]
-	list_filter = ["update","timestamp"]
-	list_editable = ["name"]
-	search_fields = ["name"]
-	class Meta:
-		model = Deployment
+    list_display = ["name", "update", "timestamp"]
+    list_display_links = ["update"]
+    list_filter = ["update", "timestamp"]
+    list_editable = ["name"]
+    search_fields = ["name"]
+
+    class Meta:
+        model = Deployment
+
 
 admin.site.register(Deployment, DeploymentModelAdmin)
 
+
 class NvfModelAdmin(admin.ModelAdmin):
-	list_display = ["name","update","timestamp"]
-	list_display_links = ["update"]
-	list_filter = ["update","timestamp"]
-	list_editable = ["name"]
-	search_fields = ["name"]
-	class Meta:
-		model = Nvf
+    list_display = ["name", "update", "timestamp"]
+    list_display_links = ["update"]
+    list_filter = ["update", "timestamp"]
+    list_editable = ["name"]
+    search_fields = ["name"]
+
+    class Meta:
+        model = Nvf
+
 
 admin.site.register(Nvf, NvfModelAdmin)
 
+class ChannelModelAdmin(admin.ModelAdmin):
+    list_display = ["name", "update", "timestamp"]
+    list_display_links = ["update"]
+    list_filter = ["update", "timestamp"]
+    list_editable = ["name"]
+    search_fields = ["name"]
+
+    class Meta:
+        model = Nvf
+
+
+admin.site.register(Channel, ChannelModelAdmin)

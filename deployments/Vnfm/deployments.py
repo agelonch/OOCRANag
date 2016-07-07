@@ -36,11 +36,11 @@ server{{num}}:
       user_data: |
         #cloud-config
         runcmd:
-         - echo "cd /home/nodea/DADES/TX_LTE/srsLTE/build/srslte/examples" >> /home/nodea/start.sh
-         - echo "./pdsch_enodeb_file -a addr={{ip}} -l 0.3 -g {{pt}} -f {{freC}} -p {{BW}} -i ../../../rfc793.txt -m 1 >> /home/nodea/run.log" >> /home/nodea/start.sh
+         - echo "{{script}}" >> /home/nodea/start.sh
          - sh /home/nodea/start.sh
 
   ''')
+
         if bts.BW_DL == 1400000:
             f = 6
         if bts.BW_DL == 3000000:
@@ -52,14 +52,11 @@ server{{num}}:
 
         nvf = nvf.render(
             name=bts.bts.name,
-            image="UBU1404SERVER6GUHD380srsLTE_AUTOSTART",
+            image=bts.vnf.image,
             # flavor = bts.split(',')[4],
             flavor="m1.small",
-            freC=frec,
-            ip=bts.name.split('-')[1],
             num=num,
-            pt=bts.Pt,
-            BW=f,
+            script=str(bts.vnf.script).replace('\n', '').replace('\r', ';').replace('{{ip}}',bts.name.split('-')[1]).replace('{{pt}}',str(bts.Pt)).replace('{{freC}}',str(frec)).replace('{{BW}}',str(f)),
         )
         nvfi = nvfi + nvf
         nvf_list.append(bts)

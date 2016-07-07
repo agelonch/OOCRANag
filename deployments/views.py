@@ -238,7 +238,7 @@ def canals_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    queryset_list = Channel.objects.filter()
+    queryset_list = Channel.objects.filter(propietario__name=request.user.username)
 
     paginator = Paginator(queryset_list, 5)
     page = request.GET.get('page')

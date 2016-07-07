@@ -6,25 +6,52 @@
 
 {%block content%}
 	<h1 class="page-header">Details of {{nvf.get_name}}</h1>
-	Frequencia central DL: {{nvf.freC_DL}}<br/>
-	Bandwidth DL: {{nvf.BW_DL}} dBm<br/>
-	Frequencia central UL: {{nvf.freC_UL}}<br/>
-	Bandwidth UL: {{nvf.BW_UL}} dBm<br/>
-	Power transmited: {{nvf.Pt}}<br/>
+	Frequencia central DL: {{nvf.freC_DL}} Hz<br/>
+	Bandwidth DL: {{nvf.BW_DL}} Hz<br/>
+	Frequencia central UL: {{nvf.freC_UL}} Hz<br/>
+	Bandwidth UL: {{nvf.BW_UL}} Hz<br/>
+	Power transmited: {{nvf.Pt}} dBm<br/>
 	Number of users : {{nvf.users}}<br/>
-	Launched at: {{nvf.timestamp}}<br/>
-	</br>
 
 	</div>
 
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Cell Parameters</h1>
+            <h3 class="page-header">Cell load</h3>
+            <div class="panel panel-default">
+		<div class="panel-body">
+            <canvas id="load" width="1000" height="300" style = "float: left"></canvas>
+            </div>
+            </div>
+        <h3>BER</h3>
+        <div class="panel panel-default">
+		<div class="panel-body">
+          <canvas id="ber" width="1000" height="300" style = "float: left"></canvas>
+            </div>
+            </div>
+    </div>
+
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Resources</h1>
-          <h3>CPU and RAM</h3>
-          <canvas id="cpu" width="600" height="300" style = "float: left"></canvas> 
-          <canvas id="ram" width="600" height="300"></canvas>
-          <h3>Network and QoS</h3>        
-          <canvas id="network" width="600" height="300" style = "float: left"></canvas>
-          <canvas id="QoS" width="600" height="300" style = "float: left"></canvas>
+            <h3>CPU</h3>
+            <div class="panel panel-default">
+		<div class="panel-body">
+          <canvas id="cpu" width="1000" height="300" style = "float: left"></canvas>
+            </div>
+                </div>
+            <h3>RAM</h3>
+          <div class="panel panel-default">
+		<div class="panel-body">
+          <canvas id="ram" width="1000" height="300"></canvas>
+            </div>
+              </div>
+                  <h3>Network</h3>
+            <div class="panel panel-default">
+		<div class="panel-body">
+
+          <canvas id="network" width="1000" height="300" style = "float: left"></canvas>
+            </div>
+                </div>
     </div>
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -64,7 +91,7 @@
 <script>
 	$(function(){
 		var data = {
-			labels: {{labels | safe}},
+			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
 			datasets:[
 			{
 				label: "the firts dataset",
@@ -74,7 +101,29 @@
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "rgba(153,0,76,1)",
-				data: {{cpu | safe}}  
+				data: [100,34,21,56,23,90,40]
+			},
+			]
+		};
+		var option = {};
+		var ctx = document.getElementById("load").getContext("2d");
+		var mylineChart = new Chart(ctx).Line(data,option);
+	});
+</script>
+<script>
+	$(function(){
+		var data = {
+			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
+			datasets:[
+			{
+				label: "the firts dataset",
+				fillColor: "rgba(153,0,76,0,2)",
+				strokeColor: "rgba(153,0,76,1)",
+				pointColor: "rgba(153,0,76,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(153,0,76,1)",
+				data: [100,34,21,56,23,90,40]
 			},
 			]
 		};
@@ -86,7 +135,7 @@
 <script>
 	$(function(){
 		var data = {
-			labels: {{labels | safe}},
+			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
 			datasets:[
 			{
 				label: "the firts dataset",
@@ -96,7 +145,7 @@
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "rgba(153,0,76,1)",
-				data: {{ram | safe}}  
+				data: [100,34,21,56,23,90,40]
 			},
 			]
 		};
@@ -145,7 +194,7 @@
 			]
 		};
 		var option = {};
-		var ctx = document.getElementById("QoS").getContext("2d");
+		var ctx = document.getElementById("ber").getContext("2d");
 		var mylineChart = new Chart(ctx).Line(data,option);
 	});
 </script>
