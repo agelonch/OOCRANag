@@ -2,39 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9c07d5d-ff1e-4b10-9908-79a1c67f73e7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/VnfmVnf/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/VnfmVnf/client.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/VnfmVnf/server.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/aloeo.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/configuration.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/cron.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/datos.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/deployments.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/heat/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/heat/heat.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/keystone/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/deployments/keystone/keystone.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/scenario/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/aloeo.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/aloeoCLI/tasks/configuration.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/scenarios/authentication.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/scenario/structura.py" afterPath="$PROJECT_DIR$/scenarios/Vnfm/structura.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/modules/__init__.py" afterPath="$PROJECT_DIR$/vnfs/Vnfm/modules/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/modules/ftp.py" afterPath="$PROJECT_DIR$/vnfs/Vnfm/modules/ftp.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/modules/multicore.py" afterPath="$PROJECT_DIR$/vnfs/Vnfm/modules/multicore.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/modules/multiprocessat.py" afterPath="$PROJECT_DIR$/vnfs/Vnfm/modules/multiprocessat.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/modules/parser_creation.py" afterPath="$PROJECT_DIR$/vnfs/Vnfm/modules/parser_creation.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/VNFM/vnfs/vnfs.py" afterPath="$PROJECT_DIR$/vnfs/Vnfm/vnfs.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/__init__.py" afterPath="$PROJECT_DIR$/vnfs/Vnfm/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/aloeoCLI/tasks/__init__.py" afterPath="$PROJECT_DIR$/scenarios/Vnfm/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deployments/Vnfm/deployments.py" afterPath="$PROJECT_DIR$/deployments/Vnfm/deployments.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deployments/views.py" afterPath="$PROJECT_DIR$/deployments/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scenarios/views.py" afterPath="$PROJECT_DIR$/scenarios/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/users/orchestration.py" afterPath="$PROJECT_DIR$/users/orchestration.py" />
     </list>
     <ignored path="NFVO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -176,20 +144,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="NFVO" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NFVO" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NFVO" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="deployments" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -370,14 +324,14 @@
     <frame x="-1" y="27" width="1368" height="741" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17274758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17274758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32828283" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32828283" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3013468" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3013468" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30808082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32828283" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -413,7 +367,8 @@
     <MESSAGE value="canals delete,add-list" />
     <MESSAGE value="are and oarea improve" />
     <MESSAGE value="update keystone" />
-    <option name="LAST_COMMIT_MESSAGE" value="update keystone" />
+    <MESSAGE value="aloeocli deleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="aloeocli deleted" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
