@@ -1,11 +1,10 @@
 from jinja2 import Template
+from VIM.OpenStack.keystone.keystone import auth
+from VIM.OpenStack.heat.heat import create_stack, delete_stack
 
-from VIM.OpenStack import heat
 
-
-def infrastructure(token, username, name ,description):
-  
-  header = Template(u'''\
+def infrastructure(user, name, description):
+    header = Template(u'''\
 heat_template_version: 2013-05-23
 
 description: {{description}}
@@ -41,7 +40,7 @@ resources:
     properties:
       name: {{name}}_router
       external_gateway_info:
-        network: 887bf999-8643-4271-9fcf-3a508b4c246e
+        network: 0e67e979-6fb8-485a-923f-1c5d57351e76
 
   {{name}}_canal_usrp_interface:
     type: OS::Neutron::RouterInterface
@@ -71,13 +70,13 @@ resources:
       subnet_id: { get_resource: {{name}}_bts_subnet }
      
   ''')
-  header = header.render(
-      description = description,
-      name = name
-  	)
-      
-  outfile = open('/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/'+name+'.yaml', 'w')
-  outfile.write(header)
-  outfile.close()
+    header = header.render(
+        description=description,
+        name=name
+    )
 
-  heat.Heat(token, username).create_stack(name, '/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/' + name + '.yaml')
+    outfile = open('/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/' + name + '.yaml', 'w')
+    outfile.write(header)
+    outfile.close()
+
+    create_stack(name,'/home/howls/Apps/OOCRAN/aloeo/resources/scenarios/yaml/' + name + '.yaml', auth(user), user.id_project)

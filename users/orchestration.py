@@ -9,7 +9,7 @@ from users.models import Client
 from twisted.internet import task
 from twisted.internet import reactor
 import threading, time
-from aloeoCLI.VNFM.deployments.deployments import create
+from deployments.Vnfm.deployments import create
 
 def optim(file):
     """

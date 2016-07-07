@@ -13,7 +13,7 @@ from scenarios.models import Bts, Area, OArea
 from users.models import Client
 import os, time
 from django.shortcuts import render
-from Vnfm.deployments import create
+from Vnfm.deployments import create, delete
 from .orchestration import planification_DL, planification_UL, rb_offer, price, list_bs
 
 
@@ -89,7 +89,7 @@ def deployment_create(request, id=None):
             bts.save()
             nvf.save()
             deploy.rb += nvf.rb_offer
-            # deploy.price = deploy.price + price(nvf, nvf.BW_DL, deploy)
+            deploy.price = deploy.price + price(nvf, nvf.BW_DL, deploy)
 
             enod_conf[element['ip']] = {"BW_DL": nvf.BW_UL, "BW_UL": nvf.BW_UL, "Pt": element['pt']}
             nvfs.append(nvf)
@@ -161,7 +161,7 @@ def deployment_delete(request, id=None):
             bts.freCs = '/'.join(lista)
             bts.save()
 
-        # delete(auth(request.user.username), request.user.username, deploy.name)
+        delete(deploy.name, deploy.propietario)
         deploy.delete()
     messages.success(request, "Deployment successfully deleted!", extra_tags="alert alert-success")
     return redirect("deployments:list")

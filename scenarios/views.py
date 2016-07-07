@@ -4,13 +4,12 @@ from .models import Bts, Area, OArea
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import AreaForm
 from operators.models import Operator
-from .authentication import auth
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 import sys, os
 
 from .orchestration import scenarioCreate
-from aloeoCLI.VNFM.scenario.structura import infrastructure
+from Vnfm.structura import infrastructure
 
 from django.contrib.auth.decorators import login_required
 
@@ -66,7 +65,7 @@ def area_create(request):
 
         operators = Operator.objects.filter()
         for operator in operators:
-            infrastructure(auth(operator.name), operator.name, form.cleaned_data.get("name"),form.cleaned_data.get("description"))
+            infrastructure(operator, form.cleaned_data.get("name"),form.cleaned_data.get("description"))
             oarea= OArea(name=form.cleaned_data.get("name"),
                          propietario=operator,
                          area=area)
@@ -85,6 +84,6 @@ def scenario_delete(request, id=None):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    instance = get_object_or_404(Scenario, id=id)
+    instance = get_object_or_404(OArea, id=id)
     instance.delete()
     return redirect("scenarios:list")

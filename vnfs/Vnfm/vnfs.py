@@ -1,4 +1,3 @@
-import aloeoCLI.VNFM.vnfs.modules.ftp as ftp
 #from VIM import ceilometer
 #from VIM import heat
 #from VIM import heat
