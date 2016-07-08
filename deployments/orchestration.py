@@ -93,6 +93,7 @@ def list_bs(file):
         nvf['vnf'] = bts.split(',')[1]
         nvf['rb'] = bts.split(',')[2]
         nvf['pt'] = bts.split(',')[3]
+        nvf['type'] = bts.split(',')[4]
         lista.append(nvf)
         
     return lista
@@ -112,13 +113,13 @@ def planification_DL(nvf,colors_op):
     colors = ast.literal_eval(colors_op.colors)
 
     if nvf.BW_DL == 1400000:
-        nvf.rb_offer = 18000000
+        nvf.rb = 18000000
     if nvf.BW_DL == 3000000:
-        nvf.rb_offer = 36000000
+        nvf.rb = 36000000
     if nvf.BW_DL == 5000000:
-        nvf.rb_offer = 72000000
+        nvf.rb = 72000000
     if nvf.BW_DL == 10000000:
-        nvf.rb_offer = 150000000
+        nvf.rb = 150000000
 
     neigh = [ str(x) for x in nvf.bts.neighbor.split('/') ]
     frequencies = []

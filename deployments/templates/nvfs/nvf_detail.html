@@ -8,11 +8,12 @@
 	<h1 class="page-header">Details of {{nvf.get_name}}</h1>
 	Frequencia central DL: {{nvf.freC_DL}} Hz<br/>
 	Bandwidth DL: {{nvf.BW_DL}} Hz<br/>
+    RB offer: {{nvf.rb}}</br>
 	Frequencia central UL: {{nvf.freC_UL}} Hz<br/>
 	Bandwidth UL: {{nvf.BW_UL}} Hz<br/>
 	Power transmited: {{nvf.Pt}} dBm<br/>
 	Number of users : {{nvf.users}}<br/>
-
+    Type of NVF: {{nvf.type}}</br>
 	</div>
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -21,12 +22,6 @@
             <div class="panel panel-default">
 		<div class="panel-body">
             <canvas id="load" width="1000" height="300" style = "float: left"></canvas>
-            </div>
-            </div>
-        <h3>BER</h3>
-        <div class="panel panel-default">
-		<div class="panel-body">
-          <canvas id="ber" width="1000" height="300" style = "float: left"></canvas>
             </div>
             </div>
     </div>
@@ -91,7 +86,7 @@
 <script>
 	$(function(){
 		var data = {
-			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
+			labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"],
 			datasets:[
 			{
 				label: "the firts dataset",
@@ -101,7 +96,7 @@
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "rgba(153,0,76,1)",
-				data: [100,34,21,56,23,90,40]
+				data: [{{nvf.load}}],
 			},
 			]
 		};
@@ -113,7 +108,7 @@
 <script>
 	$(function(){
 		var data = {
-			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
+			labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"],
 			datasets:[
 			{
 				label: "the firts dataset",
@@ -135,7 +130,7 @@
 <script>
 	$(function(){
 		var data = {
-			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
+			labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"],
 			datasets:[
 			{
 				label: "the firts dataset",
@@ -157,7 +152,7 @@
 <script>
 	$(function(){
 		var data = {
-			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
+			labels: ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"],
 			datasets:[
 			{
 				label: "the firts dataset",
@@ -173,28 +168,6 @@
 		};
 		var option = {};
 		var ctx = document.getElementById("network").getContext("2d");
-		var mylineChart = new Chart(ctx).Line(data,option);
-	});
-</script>
-<script>
-	$(function(){
-		var data = {
-			labels: ["dilluns","dimarts","dimecres","dijous","divendres","dissabte","diumenge"],
-			datasets:[
-			{
-				label: "the firts dataset",
-				fillColor: "rgba(153,0,76,0,2)",
-				strokeColor: "rgba(153,0,76,1)",
-				pointColor: "rgba(153,0,76,1)",
-				pointStrokeColor: "#fff",
-				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(153,0,76,1)",
-				data: [100,34,21,56,23,90,40] 
-			},
-			]
-		};
-		var option = {};
-		var ctx = document.getElementById("ber").getContext("2d");
 		var mylineChart = new Chart(ctx).Line(data,option);
 	});
 </script>

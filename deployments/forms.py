@@ -9,10 +9,9 @@ class DeploymentForm(forms.ModelForm):
     class Meta:
         model = Deployment
         fields = [
-            # "area",
             "name",
             "file",
-            # "start",
+            "start",
             "stop",
         ]
 

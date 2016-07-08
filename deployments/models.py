@@ -52,7 +52,9 @@ class Deployment(models.Model):
 class Nvf(models.Model):
     operator = models.ForeignKey(Operator, on_delete=models.CASCADE, null=True, blank=True)
     deploy = models.ForeignKey(Deployment, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20,null=True, blank=True)
+    type = models.CharField(max_length=20,null=True, blank=True)
+    load = models.CharField(max_length=400, null=True, blank=True)
     # Downlink
     freC_DL = models.IntegerField(null=True, blank=True)
     color_DL = models.CharField(max_length=20, null=True, blank=True, default="#AA0000")

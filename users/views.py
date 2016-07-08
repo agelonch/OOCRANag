@@ -43,6 +43,7 @@ def users_create(request):
         for element in lista:
             nvf = get_object_or_404(Nvf, name=form.cleaned_data.get("name") + '-' + element['bts'])
             nvf.users += 1
+            nvf.load = nvf.load+','+element['rb']
             cli = Client(name=form.cleaned_data.get("name") + '-' + element['name'],
                          rb=element['rb'],
                          lat=element['lat'],
@@ -79,6 +80,7 @@ def users_delete(request, id=None):
         return HttpResponseRedirect(reverse('login'))
 
     instance = get_object_or_404(Client, id=id)
+    nvf = get_object_or_404(Nvf, id=instance.nvf.id)
     instance.delete()
     messages.success(request, "Subscriber successfully deleted!", extra_tags="alert alert-success")
     return redirect("users:list")

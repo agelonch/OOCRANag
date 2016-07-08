@@ -76,11 +76,9 @@ def deployment_create(request, id=None):
                       BW_UL=int(element['rb']),
                       bts=bts,
                       deploy=deploy,
-                      static_labels='/',
-                      static_cpu='/',
-                      static_ram='/',
                       operator=get_object_or_404(Operator, name=request.user.username),
-                      Pt=element['pt'])
+                      Pt=element['pt'],
+                      type=element['type'])
 
             planification_DL(nvf, deploy.propietario)
             planification_UL(nvf)
@@ -88,11 +86,16 @@ def deployment_create(request, id=None):
             deploy.propietario.save()
             bts.save()
             nvf.save()
-            deploy.rb += nvf.rb_offer
+            deploy.rb += nvf.rb
             deploy.price = deploy.price + price(nvf, nvf.BW_DL, deploy)
 
             enod_conf[element['ip']] = {"BW_DL": nvf.BW_UL, "BW_UL": nvf.BW_UL, "Pt": element['pt']}
-            nvfs.append(nvf)
+            if str(element['type']) == "real":
+                nvfs.append(nvf)
+            if str(element['type']) == "simulation":
+                print "simulat"
+            if str(element['type']) == "virtual":
+                print "simulation"
 
         oarea.price += deploy.price
         oarea.rb_offer = rb_offer(str(deploy.rb), oarea.rb_offer, int(str(deploy.start).split(':')[0]),
