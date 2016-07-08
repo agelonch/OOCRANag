@@ -25,7 +25,6 @@ class ChannelForm(forms.ModelForm):
             "description",
             "sinr",
             "image",
-            "tx",
             "rx",
             "script",
         ]
@@ -35,7 +34,6 @@ class AddForm(forms.ModelForm):
     class Meta:
         model = Deployment
         fields = [
-            # "area",
             "name",
             "file",
         ]
