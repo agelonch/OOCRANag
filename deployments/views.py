@@ -14,6 +14,7 @@ from users.models import Client
 import os, time
 from django.shortcuts import render
 from Vnfm.deployments import create, delete
+from Vnfm.canals import create_channel
 from .orchestration import planification_DL, planification_UL, rb_offer, price, list_bs
 
 
@@ -269,6 +270,12 @@ def channel_create(request):
         instance.propietario = get_object_or_404(Operator, name=request.user.username)
         messages.success(request, "Channel successfully created!", extra_tags="alert alert-success")
         instance.save()
+
+        create_channel(get_object_or_404(Operator, name=request.user.username),
+               form.cleaned_data.get("name"),
+               form.cleaned_data.get("description"),
+               instance)
+
         return redirect("deployments:canals")
     context = {
         "user": request.user.username,

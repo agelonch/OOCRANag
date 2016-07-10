@@ -22,9 +22,7 @@ class ChannelForm(forms.ModelForm):
         fields = [
             "name",
             "description",
-            "sinr",
             "image",
-            "rx",
             "script",
         ]
 

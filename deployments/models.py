@@ -94,8 +94,6 @@ class Channel(models.Model):
     propietario = models.ForeignKey(Operator, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=120, default="Additive white gaussian noise channel")
     description = models.TextField(null=True, blank=True, default="Additive white gaussian noise channel, test bed example")
-    sinr = models.FloatField(max_length=120, default=15)
-    rx = models.CharField(max_length=120, default="192.168.10.4")
     image = models.CharField(max_length=120, null=True, blank=True, default="AWG Channel")
     script = models.TextField(null=True, blank=True,
                               default="cd /home/nodea/DADES_TX/srsLTE/build/srslte/examples\n./pdsch_enodeb_multiUser -l 0.3 -g 40.0 -p 6 -i rfc793.txt -o prova.txt")

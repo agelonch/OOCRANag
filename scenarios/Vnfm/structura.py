@@ -35,17 +35,17 @@ resources:
         - start: 10.0.0.3
           end: 10.0.0.254
 
-  {{name}}_router:
+  {{name}}_canal_router:
     type: OS::Neutron::Router
     properties:
-      name: {{name}}_router
+      name: {{name}}_canal_router
       external_gateway_info:
         network: 0e67e979-6fb8-485a-923f-1c5d57351e76
 
   {{name}}_canal_usrp_interface:
     type: OS::Neutron::RouterInterface
     properties:
-      router_id: { get_resource: {{name}}_router }
+      router_id: { get_resource: {{name}}_canal_router }
       subnet_id: { get_resource: {{name}}_canal_subnet }
 
   {{name}}_bts_net:
@@ -63,11 +63,48 @@ resources:
         - start: 20.0.0.2
           end: 20.0.0.254
 
+  {{name}}_bts_router:
+    type: OS::Neutron::Router
+    properties:
+      name: {{name}}_bts_router
+      external_gateway_info:
+        network: 0e67e979-6fb8-485a-923f-1c5d57351e76
+
   {{name}}_canal_bts_interface:
     type: OS::Neutron::RouterInterface
     properties:
-      router_id: { get_resource: {{name}}_router }
+      router_id: { get_resource: {{name}}_bts_router }
       subnet_id: { get_resource: {{name}}_bts_subnet }
+
+  {{name}}_subs_net:
+    type: OS::Neutron::Net
+    properties:
+      name: {{name}}_subs_net
+
+  {{name}}_subs_subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      name: {{name}}_subs_subnet
+      network_id: { get_resource: {{name}}_subs_net }
+      cidr: 30.0.0.0/24
+      gateway_ip: 30.0.0.1
+      allocation_pools:
+        - start: 30.0.0.2
+          end: 30.0.0.254
+
+  {{name}}_subs_router:
+    type: OS::Neutron::Router
+    properties:
+      name: {{name}}_subs_router
+      external_gateway_info:
+        network: 0e67e979-6fb8-485a-923f-1c5d57351e76
+
+  {{name}}_subs_interface:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: {{name}}_subs_router }
+      subnet_id: { get_resource: {{name}}_subs_subnet }
+
      
   ''')
     header = header.render(
