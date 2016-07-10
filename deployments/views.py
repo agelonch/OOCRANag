@@ -3,11 +3,12 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Deployment, Nvf, Channel, Channel_NVF
-from .forms import DeploymentForm, AddForm, ChannelForm
+from .models import Deployment, Nvf, Channel
+from .forms import DeploymentForm, AddForm
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from vnfs.models import Vnf
+from vnfs.forms import VnfForm
 from operators.models import Operator
 from scenarios.models import Bts, Area, OArea
 from users.models import Client
@@ -94,8 +95,9 @@ def deployment_create(request, id=None):
                 bts_list.append(nvf)
             if str(element['type']) == "virtual":
                 bts_list.append(nvf)
-                channel = Channel_NVF(name= "prova",
-                                      vnf=get_object_or_404(Channel, name=element['channel']),
+                print "arribo"
+                channel = Channel(name= "prova",
+                                      vnf=get_object_or_404(Vnf, name=element['channel']),
                                       ip=element['c_ip'],
                                       snr=element['c_snr'],
                                       deploy=deploy)
@@ -248,7 +250,8 @@ def canals_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    queryset_list = Channel.objects.filter(propietario__name=request.user.username)
+    queryset_list = Vnf.objects.filter(operador__name=request.user.username).filter(type="channel")
+    #queryset_list = Channel.objects.filter(propietario__name=request.user.username)
 
     paginator = Paginator(queryset_list, 5)
     page = request.GET.get('page')
@@ -270,10 +273,11 @@ def channel_create(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    form = ChannelForm(request.POST or None, request.FILES or None)
+    form = VnfForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
-        instance.propietario = get_object_or_404(Operator, name=request.user.username)
+        instance.operador = get_object_or_404(Operator, name=request.user.username)
+        instance.type="channel"
         messages.success(request, "Channel successfully created!", extra_tags="alert alert-success")
         instance.save()
 
@@ -306,7 +310,7 @@ def channel_delete(request, id=None):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    instance = get_object_or_404(Channel, id=id)
+    instance = get_object_or_404(Vnf, id=id)
     instance.delete()
     messages.success(request, "Channel successfully deleted!", extra_tags="alert alert-success")
     return redirect("deployments:canals")

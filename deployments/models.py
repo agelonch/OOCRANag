@@ -93,28 +93,10 @@ class Nvf(models.Model):
 class Channel(models.Model):
     propietario = models.ForeignKey(Operator, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=120, default="AWGN")
-    description = models.TextField(null=True, blank=True, default="Additive white gaussian noise channel")
-    image = models.CharField(max_length=120, null=True, blank=True, default="UBU1404SERVER6GUHD380srsLTE_AUTOSTART")
-    script = models.TextField(null=True, blank=True,
-                              default="cd /home/nodea/channel\n./ChannelNoise {{ip}} {{snr}}")
-
-    update = models.DateTimeField(auto_now=True, auto_now_add=False)
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolut_url(self):
-        return reverse("deployments:channel_detail", kwargs={"id": self.id})
-
-
-class Channel_NVF(models.Model):
-    propietario = models.ForeignKey(Operator, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=120, default="AWGN")
     deploy = models.ForeignKey(Deployment, on_delete=models.CASCADE, null=True, blank=True)
     ip = models.CharField(max_length=20, null=True, blank=True)
     snr = models.FloatField(null=True, blank=True)
-    vnf = models.ForeignKey(Channel, on_delete=models.CASCADE, null=True, blank=True)
+    vnf = models.ForeignKey(Vnf, on_delete=models.CASCADE, null=True, blank=True)
 
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

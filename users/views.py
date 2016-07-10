@@ -4,9 +4,10 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
-from .forms import UserForm
+from .forms import VnfForm
 from .models import Client
-from deployments.models import Nvf, Deployment
+from vnfs.models import Vnf
+from deployments.models import Nvf
 from django.contrib import messages
 from operators.models import Operator
 from .orchestration import optim, distance, mcs
@@ -16,7 +17,8 @@ def users_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    queryset_list = Client.objects.filter(operator__name=request.user.username)
+    queryset_list = Vnf.objects.filter(operador__name=request.user.username).filter(type="subscriber")
+    #queryset_list = Client.objects.filter(operator__name=request.user.username).
 
     paginator = Paginator(queryset_list, 5)
     page = request.GET.get('page')
@@ -33,7 +35,7 @@ def users_list(request):
     return render(request, "users/users_list.html", context)
 
 
-def users_create(request):
+'''def users_create(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
@@ -73,14 +75,30 @@ def users_create(request):
         "deploys": Deployment.objects.filter(propietario__name=request.user.username),
     }
     return render(request, "users/users_form.html", context)
+'''
+def users_create(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('login'))
 
+    form = VnfForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.operador = get_object_or_404(Operator, name=request.user.username)
+        instance.type = "subscriber"
+        messages.success(request, "Successfully created!", extra_tags="alert alert-success")
+        instance.save()
+        return redirect("users:list")
+    context = {
+        "user": request.user.username,
+        "form": form,
+    }
+    return render(request, "users/vnf_form.html", context)
 
 def users_delete(request, id=None):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    instance = get_object_or_404(Client, id=id)
-    nvf = get_object_or_404(Nvf, id=instance.nvf.id)
+    instance = get_object_or_404(Vnf, id=id)
     instance.delete()
     messages.success(request, "Subscriber successfully deleted!", extra_tags="alert alert-success")
     return redirect("users:list")

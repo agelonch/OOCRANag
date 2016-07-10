@@ -1,31 +1,30 @@
 {% extends "base.html" %}
 
 {% block content%}
-	<h2 class="sub-header">List of virtual Users</h2>
+	<h2 class="sub-header">Catalog of Subscribers</h2>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Bts</th>
-                  <th>Pt DL</th>
-                  <th>Pt UL</th>
-                  <th>Service</th>
-                  <th>MCS</th>
+                  <th>Description</th>
+                  <th>MFLOPS</th>
+                  <th>RAM (MB)</th>
+                  <th>Network (MB/s)</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {% for client in object_list %}
+                    {% for vnf in object_list %}
                         <tr>
-                          <td>{{client.get_name}}</td>
-                          <td>{{client.nvf}}</td>
-                          <td>{{client.pt_dl}}</td>
-                          <td>{{client.pt_dl}}</td>
-                          <td>{{client.rb}}</td>
-                          <td>{{client.mcs}}</td>
+                          <td><a href='{{vnf.get_absolut_url}}'>{{vnf.name}}</a></td>
+                          <td>{{vnf.description}}</td>
+                          <td>{{vnf.cpu}}</td>
+                          <td>{{vnf.ram}}</td>
+                          <td>23</td>
                           <td>
-                            <a href="{{client.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
+                            <a href="{{vnf.id}}/edit/" class="btn btn-default" role="button">Edit</a>
+                            <a href="{{vnf.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
                           </td>
                         </tr>
                     {%endfor%}
@@ -38,14 +37,16 @@
             {% if object_list.has_previous %}
                 <a href="?page={{ object_list.previous_page_number }}">previous</a>
             {% endif %}
+
             <span class="current">
                 Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
             </span>
+
             {% if object_list.has_next %}
                 <a href="?page={{ object_list.next_page_number }}">next</a>
             {% endif %}
           </span>
         </div>
         </br>
-  <a href="create/" class="btn btn-default" role="button">Add clients</a>
+  <a href="create/" class="btn btn-default" role="button">Create VNF</a>
 {% endblock content %}

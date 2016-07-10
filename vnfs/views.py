@@ -6,9 +6,7 @@ from operators.models import Operator
 from .forms import VnfForm
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from .authentication import auth
 
-#from aloeoCLI.VNFM.vnfs.vnfs import create
 
 from django.contrib.auth.decorators import login_required
 
@@ -17,7 +15,7 @@ def vnf_list(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
-    queryset_list = Vnf.objects.filter(operador__name=request.user.username)
+    queryset_list = Vnf.objects.filter(operador__name=request.user.username).filter(type="bts")
 
     paginator = Paginator(queryset_list, 5)
     page = request.GET.get('page')
@@ -42,6 +40,7 @@ def vnf_create(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.operador = get_object_or_404(Operator, name=request.user.username)
+        instance.type = "bts"
         # results = create(auth(request.user.username),request.user.username,form.cleaned_data.get("name"), form.cleaned_data.get("description"))
         messages.success(request, "Successfully created!", extra_tags="alert alert-success")
         # instance.cpu = results[0][0]

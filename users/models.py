@@ -33,3 +33,4 @@ class Client(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-update"]
+
