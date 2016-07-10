@@ -52,19 +52,27 @@
           </ul>
           <ul class="nav nav-sidebar">
             <li>
-              <a style="color: #9d9d9d; font-size: 16px" href="{% url 'vnfs:list' %}">
-                <i class="glyphicon glyphicon-tasks" style="font-size:16px;"></i>  VNF Catalog</a>
+              <a style="color: #9d9d9d; font-size: 16px" href="">
+                <i class="" style="font-size:16px;"></i>Virtual Network Function</a>
             </li>
+            <li>
+              <a style="color: #9d9d9d; font-size: 16px" href="{% url 'vnfs:list' %}">
+                <i class="glyphicon glyphicon-tasks" style="font-size:16px;"></i>  BT Catalog</a>
+            </li>
+            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'deployments:canals' %}">
+              <i class="material-icons" style="font-size:16px">perm_scan_wifi</i>  Channel Catalog</a></li>
+            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'users:list' %}">
+                <i class="glyphicon glyphicon-phone" style="font-size:16px;"></i>  Terminal Catalog</a></li>
           </ul>
           <ul class="nav nav-sidebar">
+            <li>
+              <a style="color: #9d9d9d; font-size: 16px" href="">
+                <i class="" style="font-size:16px;"></i>Network Virtual function</a>
+            </li>
             <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'scenarios:list' %}">
               <i class="glyphicon glyphicon-globe" style="font-size:16px;"></i>  Areas</a></li>
             <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'deployments:list' %}">
               <i class="material-icons" style="font-size:16px">settings_input_antenna</i> Deployment</a></li>
-            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'deployments:canals' %}">
-              <i class="material-icons" style="font-size:16px">perm_scan_wifi</i>  Canals</a></li>
-            <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'users:list' %}">
-                <i class="glyphicon glyphicon-phone" style="font-size:16px;"></i>  Terminals</a></li>  
           </ul>
           <!--<ul class="nav nav-sidebar">
             <li><a style="color: #9d9d9d; font-size: 16px" href="{% url 'networks:list' %}">

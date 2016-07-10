@@ -29,7 +29,7 @@ channel{{num}}:
       image: {{image}}
       flavor: {{flavor}}
       networks:
-      - network: EETAC2_canal_net
+      - network: {{net}}_canal_net
       user_data_format: RAW
       user_data: |
         #cloud-config
@@ -43,6 +43,7 @@ channel{{num}}:
         name=instance.name,
         image=instance.image,
         # flavor = bts.split(',')[4],
+        net=instance.area.name,
         flavor="m1.small",
         #script=str(bts.vnf.script).replace('\n', '').replace('\r', ';').replace('{{ip}}',bts.name.split('-')[1]).replace('{{pt}}',str(bts.Pt)).replace('{{freC}}',str(frec)).replace('{{BW}}',str(f)),
     )

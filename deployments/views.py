@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Deployment, Nvf, Channel
+from .models import Deployment, Nvf, Channel, Channel_NVF
 from .forms import DeploymentForm, AddForm, ChannelForm
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -65,8 +65,8 @@ def deployment_create(request, id=None):
         deploy.area = oarea
         deploy.save()
 
-        nvfs = []
-        enod_conf = {}
+        bts_list = []
+        channels = []
 
         lista = list_bs(form.cleaned_data.get("file"))
         for element in lista:
@@ -90,13 +90,19 @@ def deployment_create(request, id=None):
             deploy.rb += nvf.rb
             deploy.price = deploy.price + price(nvf, nvf.BW_DL, deploy)
 
-            enod_conf[element['ip']] = {"BW_DL": nvf.BW_UL, "BW_UL": nvf.BW_UL, "Pt": element['pt']}
             if str(element['type']) == "real":
-                nvfs.append(nvf)
+                bts_list.append(nvf)
+            if str(element['type']) == "virtual":
+                bts_list.append(nvf)
+                channel = Channel_NVF(name= "prova",
+                                      vnf=get_object_or_404(Channel, name=element['channel']),
+                                      ip=element['c_ip'],
+                                      snr=element['c_snr'],
+                                      deploy=deploy)
+
+                channels.append(channel)
             if str(element['type']) == "simulation":
                 print "simulat"
-            if str(element['type']) == "virtual":
-                print "simulation"
 
         oarea.price += deploy.price
         oarea.rb_offer = rb_offer(str(deploy.rb), oarea.rb_offer, int(str(deploy.start).split(':')[0]),
@@ -107,7 +113,7 @@ def deployment_create(request, id=None):
         create(get_object_or_404(Operator, name=request.user.username),
                form.cleaned_data.get("name"),
                form.cleaned_data.get("description"),
-               nvfs)
+               bts_list, channels)
 
         messages.success(request, "Deployment successfully created!", extra_tags="alert alert-success")
         return redirect("deployments:list")
@@ -271,10 +277,10 @@ def channel_create(request):
         messages.success(request, "Channel successfully created!", extra_tags="alert alert-success")
         instance.save()
 
-        create_channel(get_object_or_404(Operator, name=request.user.username),
+        '''create_channel(get_object_or_404(Operator, name=request.user.username),
                form.cleaned_data.get("name"),
                form.cleaned_data.get("description"),
-               instance)
+               instance)'''
 
         return redirect("deployments:canals")
     context = {

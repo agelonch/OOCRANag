@@ -7,9 +7,10 @@
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>SINR (dB)</th>
-                  <th>TX IP</th>
-                  <th>RX IP</th>
+                  <th>Description</th>
+                  <th>MFLOPS</th>
+                  <th>RAM (MB)</th>
+                  <th>Network (MB/s)</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -17,9 +18,10 @@
                     {% for obj in object_list %}
                         <tr>
                           <td><a href='{{obj.get_absolut_url}}'>{{obj.name}}</a></td>
+                            <td>{{obj.description}}</td>
                             <td>15</td>
-                            <td>192.168.1.9</td>
-                          <td>192.168.1.12</td>
+                            <td>70</td>
+                          <td>10</td>
                           <td>
                             <a href="{{obj.id}}/delete/" class="btn btn-danger" role="button">Delete</a>
                           </td>

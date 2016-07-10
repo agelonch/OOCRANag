@@ -94,6 +94,9 @@ def list_bs(file):
         nvf['rb'] = bts.split(',')[2]
         nvf['pt'] = bts.split(',')[3]
         nvf['type'] = bts.split(',')[4]
+        nvf['channel'] = bts.split(',')[5]
+        nvf['c_ip'] = bts.split(',')[6]
+        nvf['c_snr'] = bts.split(',')[7]
         lista.append(nvf)
         
     return lista
@@ -141,7 +144,6 @@ def planification_DL(nvf,colors_op):
                 start = int(start)+int(nvf.BW_DL)
         else:
             start = int(start)+int(nvf.BW_DL)
-
 
     if colors.has_key(nvf.freC_DL):
         nvf.color_DL = colors[nvf.freC_DL]
