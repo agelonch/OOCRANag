@@ -27,6 +27,7 @@ resources:
 server{{num}}:
     type: OS::Nova::Server
     properties:
+      name: {{name}}
       image: {{image}}
       flavor: {{flavor}}
       networks:
@@ -67,6 +68,7 @@ server{{num}}:
 channel{{num}}:
     type: OS::Nova::Server
     properties:
+      name: {{name}}
       image: {{image}}
       flavor: {{flavor}}
       networks:

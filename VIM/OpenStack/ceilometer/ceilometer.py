@@ -2,7 +2,7 @@ import ceilometerclient.v2 as c_client
 import keystoneclient.v2_0.client as k_client
 import time
 
-from VIM import nova
+from VIM.OpenStack.nova import nova
 
 
 def statistics(vm, name):
@@ -47,5 +47,6 @@ def monitor_resources(name):
    id = nova.find_vm(name)
    results.append(statistics(id.id, name)) 
 
+   print results
    return results
 

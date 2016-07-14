@@ -133,7 +133,7 @@
         var data = [
           {% for nvf in nvfs %}
             {
-              value: {{nvf.vnf.network}},
+              value: {{nvf.vnf.ram}},
               color: dynamicColors(),
               highlight: dynamicColors(),
               label: "{{nvf.get_name}}" 
@@ -154,12 +154,12 @@
         var ctx = $("#radio").get(0).getContext("2d");
         //sum = 360
         var data = [
-            {% for nvf in nvfs %}
+            {% for nvf in frecs %}
             {
-              value: {{nvf.BW_DL}},
-              color: dynamicColors(),
-              highlight: dynamicColors(),
-              label: "{{nvf.get_name}}" 
+              value: 14000,
+              color: '{{nvf}}',
+              highlight: '{{nvf}}',
+              label: "{{nvf}}"
             },
             {%endfor%}
         ];

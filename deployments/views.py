@@ -15,7 +15,9 @@ from users.models import Client
 import os, time
 from django.shortcuts import render
 from Vnfm.deployments import create, delete
-from Vnfm.canals import create_channel
+from VIM.OpenStack.nova import nova
+from VIM.OpenStack.ceilometer.ceilometer import statistics
+from time import time
 from .orchestration import planification_DL, planification_UL, rb_offer, price, list_bs
 
 
@@ -46,6 +48,10 @@ def deployment_create(request, id=None):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('login'))
 
+    #########################################3
+    tiempo_inicial = time()
+    #########################################3
+
     form = DeploymentForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         deploy = form.save(commit=False)
@@ -60,8 +66,7 @@ def deployment_create(request, id=None):
             }
             return render(request, "deployments/add_catalog.html", context)
 
-        deploy.propietario = get_object_or_404(Operator, name=request.user.username)
-        deploy.start = time.strftime("%H:00")
+        deploy.propietario = get_object_or_404(Operator,name=request.user.username)
         oarea = get_object_or_404(OArea, pk=id)
         deploy.area = oarea
         deploy.save()
@@ -116,6 +121,12 @@ def deployment_create(request, id=None):
                form.cleaned_data.get("name"),
                form.cleaned_data.get("description"),
                bts_list, channels)
+
+        ########################################3
+        tiempo_final = time()
+        tiempo_ejecucion = tiempo_final - tiempo_inicial
+        print 'El tiempo de ejecucion fue:',tiempo_ejecucion
+        #########################################3
 
         messages.success(request, "Deployment successfully created!", extra_tags="alert alert-success")
         return redirect("deployments:list")
@@ -188,12 +199,15 @@ def deployment_detail(request, id=None):
     clients = Client.objects.filter(deploy__name=instance.name)
     operator = get_object_or_404(Operator, name=request.user.username)
 
+    frecs = ["#5ED3F8","#E325B9","#FFFF00"]
+
     context = {
         "user": operator,
         "deployment": instance,
         "scenario": scenario,
         "btss": Bts.objects.filter(area=scenario),
         "nvfs": Nvf.objects.filter(deploy=instance),
+        "frecs":frecs,
         "clients": clients,
     }
     return render(request, "deployments/deployment_detail.html", context)
@@ -226,9 +240,9 @@ def nvf_detail(request, id=None):
 
     instance = get_object_or_404(Nvf, id=id)
     clients = Client.objects.filter(nvf__name=instance.name)
-    # name = nova.find_vm(instance.name)
+    name = nova.find_vm(instance.name)
 
-    # (cpu, ram) = statistics(name.id,instance.name)
+    (cpu, ram) = statistics(name.id,instance.name)
 
     # instance.static_labels += str(time.strftime("%H:%M:%S")) + '/'
     # instance.static_cpu += str(cpu) + '/'

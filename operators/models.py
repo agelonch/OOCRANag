@@ -8,7 +8,7 @@ class Operator(models.Model):
     name = models.CharField(max_length=120)
     bandwidth = models.FloatField()
     mcs = models.FileField(null=True, blank=True,upload_to='settings/')
-    colors = models.CharField(max_length=500000,null=True, blank=True)
+    colors = models.CharField(max_length=500000,null=True, blank=True, default="{}")
     end_nova=models.CharField(max_length=120,null=True, blank=True,default="http://147.83.188.226:5000/v2.0/")
     end_keystone=models.CharField(max_length=120,null=True, blank=True,default="http://147.83.118.228:5000/v3/")
     end_ceilometer=models.CharField(max_length=120,null=True, blank=True,default="http://147.83.188.226:8777")

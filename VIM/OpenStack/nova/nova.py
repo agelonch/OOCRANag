@@ -1,5 +1,4 @@
-import os
-import aloeoCLI.tasks.configuration as conf
+from credentials import get_nova_credentials_v2
 from novaclient.client import Client
 from novaclient.v2.flavors import Flavor
 
@@ -30,9 +29,15 @@ def flavor(name, values):
 
 
 def find_vm(name):
-    nova_client = Client(version='2',
+    print "prova"
+    '''nova_client = Client(version='2',
                          username='operator1',
                          api_key='odissey09',
                          auth_url='http://147.83.118.228:5000/v2.0/',
-                         project_id='operator1')
-    return nova_client.servers.find(name=name)
+                         project_id='operator1')'''
+    credentials = get_nova_credentials_v2()
+    nova_client = Client(**credentials)
+    print "dins"
+    print(nova_client.servers.list())
+    print "fora"
+    #return nova_client.servers.find(name=name)
