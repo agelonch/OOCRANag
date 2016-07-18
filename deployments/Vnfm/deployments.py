@@ -3,7 +3,7 @@ from VIM.OpenStack.keystone.keystone import auth
 from VIM.OpenStack.heat.heat import create_stack, delete_stack
 
 
-def create(user, name, description, bts, channels):
+def create(user, name, description, bts, channels, communications):
 
     header = Template(u'''\
 heat_template_version: 2015-10-15
@@ -93,6 +93,40 @@ channel{{num}}:
         )
         nvfi = nvfi + canal
         num = num + 1
+
+    ##########################################################
+    num = 0
+    for comm in communications:
+        communication = Template(u'''\
+communication{{num}}:
+    type: OS::Nova::Server
+    properties:
+      name: proba
+      image: {{image}}
+      flavor: {{flavor}}
+      networks:
+      - network: {{net}}_subs_net
+      user_data_format: RAW
+      user_data: |
+        #cloud-config
+        runcmd:
+         - echo "{{script}}" >> /home/nodea/start.sh
+         - sh /home/nodea/start.sh
+
+  ''')
+
+        communication = communication.render(
+            name=comm.name,
+            image=comm.vnf.image,
+            # flavor = bts.split(',')[4],
+            net=comm.deploy.area.name,
+            flavor="m1.small",
+            num=num,
+            script="./RX -n 1000 &;./TX -n 1000 &;./Channel",
+        )
+        nvfi = nvfi + communication
+        num = num + 1
+    ##########################################################
 
     outfile = open('/home/howls/Apps/OOCRAN/aloeo/resources/deployments/yaml/' + name + '.yaml', 'w')
     outfile.write(header + nvfi)

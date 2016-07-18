@@ -97,7 +97,7 @@ class OArea(models.Model):
     area = models.ForeignKey(Area, on_delete=models.CASCADE, null=True, blank=True)
     price = models.FloatField(null=True, blank=True, default=0)
     forecast = models.CharField(max_length=500, null=True, blank=True,
-                                default='[17000000,14000000,11000000,9000000,7000000,8000000,9500000,12000000,14000000,3000000,3500000,3400000,5500000,3400000,3450000,3460000,3470000,3300000,6000000,11000000,18000000,21000000,20500000,19500000]')
+                                default='[170000000,140000000,110000000,90000000,70000000,80000000,95000000,120000000,140000000,30000000,35000000,34000000,55000000,34000000,34500000,34600000,34700000,33000000,60000000,110000000,180000000,210000000,205000000,195000000]')
     rb_offer = models.CharField(max_length=500, null=True, blank=True,
                                 default='[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]')
     update = models.DateTimeField(auto_now=True, auto_now_add=False)

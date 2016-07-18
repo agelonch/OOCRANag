@@ -24,7 +24,7 @@ def distance(lon1, lat1, lon2, lat2):
 def price(nvf, spectre,deploy):
     price_spec = 0
     if spectre == 1400000:
-        price_spec = 100.0
+        price_spec = 1.88
     if spectre == 3000000:
         price_spec = 200.0
     if spectre == 5000000:
@@ -32,9 +32,9 @@ def price(nvf, spectre,deploy):
     if spectre == 10000000:
         price_spec = 400.0
 
-    #t = int(deploy.stop.strftime("%H")) - int(deploy.start.strftime("%H"))
+    t = int(deploy.stop.strftime("%H")) - int(deploy.start.strftime("%H"))
     #price = (price_spec+nvf.vnf.ram*0.005+nvf.vnf.cpu*0.005)*t
-    price = (price_spec+nvf.vnf.ram*0.005+nvf.vnf.cpu*0.005)
+    price = price_spec*t
          
     return float(price)
 

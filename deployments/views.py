@@ -73,6 +73,7 @@ def deployment_create(request, id=None):
 
         bts_list = []
         channels = []
+        communications = []
 
         lista = list_bs(form.cleaned_data.get("file"))
         for element in lista:
@@ -99,15 +100,15 @@ def deployment_create(request, id=None):
             if str(element['type']) == "real":
                 bts_list.append(nvf)
             if str(element['type']) == "virtual":
-                bts_list.append(nvf)
-                print "arribo"
-                channel = Channel(name= "prova",
+                #bts_list.append(nvf)
+                '''channel = Channel(name= "prova",
                                       vnf=get_object_or_404(Vnf, name=element['channel']),
                                       ip=element['c_ip'],
                                       snr=element['c_snr'],
-                                      deploy=deploy)
+                                      deploy=deploy)'''
 
-                channels.append(channel)
+                #channels.append(channel)
+                communications.append(nvf)
             if str(element['type']) == "simulation":
                 print "simulat"
 
@@ -120,7 +121,7 @@ def deployment_create(request, id=None):
         create(get_object_or_404(Operator, name=request.user.username),
                form.cleaned_data.get("name"),
                form.cleaned_data.get("description"),
-               bts_list, channels)
+               bts_list, channels, communications)
 
         ########################################3
         tiempo_final = time()
@@ -337,13 +338,13 @@ def autodeploy(request, id=None):
     area = get_object_or_404(OArea, pk=id)
     auto_deploy = Deployment(area=area, name=area.name, start="00:00", stop="23:59",
                              propietario=get_object_or_404(Operator, name=request.user.username))
-    catalog = Deployment.objects.filter(propietario__name=request.user.username).filter(start=None)
+    catalog = Deployment.objects.filter(propietario__name=request.user.username).filter(auto=True)
     rbs = [int(x) for x in area.forecast[1:-1].split(',')]
     catalog = [int(x.name) for x in catalog]
 
     cont = 0
     for deploy in rbs:
-        select = 9999999999999999
+        select = 200000000
         for i in catalog:
             if i == deploy:
                 select = i
@@ -397,6 +398,7 @@ def add_catalog(request, id=None):
     form = AddForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         deploy = form.save(commit=False)
+        deploy.auto = True
         deploy.propietario = get_object_or_404(Operator, name=request.user.username)
         area = get_object_or_404(OArea, pk=id)
         search_depl = Deployment.objects.filter(name=form.cleaned_data.get("name"))

@@ -14,6 +14,7 @@ class Deployment(models.Model):
     file = models.FileField(null=True, blank=True, upload_to='deployments/')
     start = models.TimeField(null=True, blank=True)
     stop = models.TimeField(null=True, blank=True)
+    auto = models.BooleanField(default=False)
     price = models.FloatField(null=True, blank=True, default=0)
     rb = models.IntegerField(null=True, blank=True, default=0)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)

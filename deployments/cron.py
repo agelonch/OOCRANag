@@ -51,8 +51,8 @@ def auto_delete_deploy_job():
 
 
 def auto_create_deploy_job():
-    deploys = Deployment.objects.filter(propietario__name="operator1").filter(start__isnull=False)
-
+    deploys = Deployment.objects.filter(propietario__name="operator1").filter(auto=True)
+    print deploys
     for deploy in deploys:
         plan = str(deploy.area.rb_offer)[1:-1].split(',')
         nvfs = Nvf.objects.filter(deploy__name=plan[int(time.strftime("%H"))])
