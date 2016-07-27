@@ -24,7 +24,7 @@ def distance(lon1, lat1, lon2, lat2):
 def price(nvf, spectre,deploy):
     price_spec = 0
     if spectre == 1400000:
-        price_spec = 1.88
+        price_spec = 1.74
     if spectre == 3000000:
         price_spec = 200.0
     if spectre == 5000000:
@@ -95,8 +95,7 @@ def list_bs(file):
         nvf['pt'] = bts.split(',')[3]
         nvf['type'] = bts.split(',')[4]
         nvf['channel'] = bts.split(',')[5]
-        nvf['c_ip'] = bts.split(',')[6]
-        nvf['c_snr'] = bts.split(',')[7]
+        nvf['subs'] = bts.split(',')[6]
         lista.append(nvf)
         
     return lista

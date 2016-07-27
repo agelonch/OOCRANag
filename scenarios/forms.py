@@ -10,5 +10,5 @@ class AreaForm(forms.ModelForm):
             "description",
             "latitude",
             "longitude",
-            "file",
+            "file"
         ]

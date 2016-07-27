@@ -14,7 +14,7 @@ from scenarios.models import Bts, Area, OArea
 from users.models import Client
 import os, time
 from django.shortcuts import render
-from Vnfm.deployments import create, delete
+from Vnfm.deployments import create, delete, create_virtual
 from VIM.OpenStack.nova import nova
 from VIM.OpenStack.ceilometer.ceilometer import statistics
 from time import time
@@ -100,15 +100,15 @@ def deployment_create(request, id=None):
             if str(element['type']) == "real":
                 bts_list.append(nvf)
             if str(element['type']) == "virtual":
-                #bts_list.append(nvf)
-                '''channel = Channel(name= "prova",
-                                      vnf=get_object_or_404(Vnf, name=element['channel']),
-                                      ip=element['c_ip'],
-                                      snr=element['c_snr'],
-                                      deploy=deploy)'''
-
-                #channels.append(channel)
-                communications.append(nvf)
+                bts_list.append(nvf)
+                print element['channel']
+                channel = get_object_or_404(Vnf, name=element['channel'])
+                print channel
+                channels.append(channel)
+                subs = get_object_or_404(Vnf, name=element['subs'])
+                communications.append(subs)
+                print subs
+                print channel
             if str(element['type']) == "simulation":
                 print "simulat"
 
@@ -118,10 +118,16 @@ def deployment_create(request, id=None):
         oarea.save()
         deploy.save()
 
-        create(get_object_or_404(Operator, name=request.user.username),
-               form.cleaned_data.get("name"),
-               form.cleaned_data.get("description"),
-               bts_list, channels, communications)
+        if form.cleaned_data.get("name") is "virtual":
+            create_virtual(get_object_or_404(Operator, name=request.user.username),
+                   form.cleaned_data.get("name"),
+                   form.cleaned_data.get("description"),
+                   bts_list, channels, communications)
+        else:
+            create(get_object_or_404(Operator, name=request.user.username),
+                   form.cleaned_data.get("name"),
+                   form.cleaned_data.get("description"),
+                   bts_list, channels, communications)
 
         ########################################3
         tiempo_final = time()
@@ -428,9 +434,9 @@ def add_catalog(request, id=None):
                       operator=get_object_or_404(Operator, name=request.user.username),
                       Pt=element['pt'])
 
-            nvf.radio = nvf.bts.max_dist(int(element['pt']), 2400700000)
+            #deploy.price = deploy.price + price(nvf, nvf.BW_DL, deploy)
 
-            deploy.price = deploy.price + price(nvf, nvf.BW_DL, deploy)
+            nvf.radio = nvf.bts.max_dist(int(element['pt']), 2400700000)
             nvf.save()
 
         area.save()

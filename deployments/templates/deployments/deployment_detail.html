@@ -154,12 +154,12 @@
         var ctx = $("#radio").get(0).getContext("2d");
         //sum = 360
         var data = [
-            {% for nvf in frecs %}
+            {% for nvf in nvfs %}
             {
-              value: 14000,
-              color: '{{nvf}}',
-              highlight: '{{nvf}}',
-              label: "{{nvf}}"
+              value: {{nvf.freC_DL}},
+              color: dynamicColors(),
+              highlight: dynamicColors(),
+              label: "{{nvf.get_name}}"
             },
             {%endfor%}
         ];
