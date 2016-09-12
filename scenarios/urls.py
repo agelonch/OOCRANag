@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^areas/(?P<id>\d+)/$', area_detail, name='area_detail'),
     # url(r'^(?P<id>\d+)/edit/$', vnf_edit, name='edit'),
     url(r'^(?P<id>\d+)/delete/$', scenario_delete, name="delete"),
+    
 ]
