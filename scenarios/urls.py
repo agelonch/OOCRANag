@@ -30,5 +30,6 @@ urlpatterns = [
     # url(r'^(?P<id>\d+)/edit/$', vnf_edit, name='edit'),
     url(r'^(?P<id>\d+)/delete/$', scenario_delete, name="delete"),
 
-    
+
+
 ]
